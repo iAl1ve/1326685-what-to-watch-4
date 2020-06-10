@@ -13,6 +13,6 @@ parserOptions:
 
 plugins: ['react']
 
-setting:
+settings:
   react:
     version: '16'
