@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
+const titleButtonHandler = () => {};
+
 const App = (props) => {
   const {title, genre, year, listMovies} = props;
 
@@ -11,6 +13,7 @@ const App = (props) => {
       genre = {genre}
       year = {year}
       listMovies = {listMovies}
+      onTitleButtonClick = {titleButtonHandler}
     />
   );
 };
@@ -24,6 +27,7 @@ App.propTypes = {
         title: PropTypes.string.isRequired,
       })
   ).isRequired,
+  onTitleButtonClick: PropTypes.func.isRequired,
 };
 
 export default App;
