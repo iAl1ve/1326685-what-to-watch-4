@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import Films from "../films/films.jsx";
 
 const Main = (props) => {
-  const {title, genre, year, listMovies} = props;
+  const {title, genre, year, listMovies, onTitleButtonClick} = props;
 
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="{title}" />
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -33,7 +33,7 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="{title} poster" width="218" height="327" />
+              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -100,7 +100,7 @@ const Main = (props) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {listMovies.map((movie) => <Films key={movie.title} title={movie.title} />)}
+            {listMovies.map((movie) => <Films key={movie.title} title={movie.title} onTitleButtonClick = {onTitleButtonClick}/>)}
           </div>
 
           <div className="catalog__more">
@@ -135,6 +135,7 @@ Main.propTypes = {
         title: PropTypes.string.isRequired,
       })
   ).isRequired,
+  onTitleButtonClick: PropTypes.func.isRequired,
 };
 
 export default Main;
