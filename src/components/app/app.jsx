@@ -1,17 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
+import {appType} from '../../types/index.js';
 
 const titleButtonHandler = () => {};
 
-const App = (props) => {
-  const {title, genre, year, listMovies} = props;
+const App = (appProps) => {
+  const {title, genre, year, src, background, listMovies} = appProps;
 
   return (
     <Main
       title = {title}
       genre = {genre}
       year = {year}
+      src = {src}
+      background = {background}
       listMovies = {listMovies}
       onTitleButtonClick = {titleButtonHandler}
     />
@@ -19,15 +21,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
-  listMovies: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-      })
-  ).isRequired,
-  onTitleButtonClick: PropTypes.func.isRequired,
+  appProps: appType,
 };
 
 export default App;
