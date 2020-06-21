@@ -22,9 +22,9 @@ class MovieList extends PureComponent {
             key = {movie.title}
             movie = {movie}
             onTitleButtonClick = {onTitleButtonClick}
-            onMovieCardHover = {(currentFilm) => {
+            onMovieCardHover = {() => {
               this.setState({
-                activeFilm: currentFilm,
+                activeFilm: movie,
               });
             }}
           />)

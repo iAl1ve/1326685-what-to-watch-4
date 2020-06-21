@@ -25,7 +25,7 @@ describe(`Test Render App`, () => {
         genre = {`documentary`}
         year = {2000}
         src = {`img/seven-years-in-tibet.jpg`}
-        background = {`bg-the-grand-budapest-hotel`}
+        background = {`img/bg-the-grand-budapest-hotel.jpg`}
         listMovies = {ListMovies}
         onTitleButtonClick = {onTitleButtonClick}
       />).toJSON();
