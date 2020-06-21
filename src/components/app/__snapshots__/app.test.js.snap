@@ -71,7 +71,7 @@ Array [
           <img
             alt="Seven Years in Tibet"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="img/seven-years-in-tibet.jpg"
             width="218"
           />
         </div>
@@ -262,9 +262,12 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <img
-              alt="Midnight Special"
+              alt="Fantastic Beasts: The Crimes of Grindelwald"
               height="175"
               src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
               width="280"
@@ -278,7 +281,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Midnight Special
+              Fantastic Beasts: The Crimes of Grindelwald
             </a>
           </h3>
         </article>
@@ -287,11 +290,14 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <img
-              alt="Dardjeeling Limited"
+              alt="Bohemian Rhapsody"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="img/bohemian-rhapsody.jpg"
               width="280"
             />
           </div>
@@ -303,7 +309,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Dardjeeling Limited
+              Bohemian Rhapsody
             </a>
           </h3>
         </article>
@@ -312,11 +318,14 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <img
-              alt="Mindhunter"
+              alt="Macbeth"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="img/macbeth.jpg"
               width="280"
             />
           </div>
@@ -328,7 +337,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Mindhunter
+              Macbeth
             </a>
           </h3>
         </article>

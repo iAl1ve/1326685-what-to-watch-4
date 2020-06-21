@@ -1,16 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Render Films Render Films 1`] = `
+exports[`Test Render MovieCard Render MovieCard 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
 >
   <div
     className="small-movie-card__image"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <img
       alt="Moonrise Kingdom"
       height="175"
-      src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      src="img/moonrise-kingdom.jpg"
       width="280"
     />
   </div>

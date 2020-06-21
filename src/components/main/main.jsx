@@ -1,15 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
-import Films from "../films/films.jsx";
+import MoviesList from "../movies-list/movies-list.jsx";
+import {appType} from '../../types/index.js';
 
-const Main = (props) => {
-  const {title, genre, year, listMovies, onTitleButtonClick} = props;
+const Main = (appProps) => {
+  const {title, genre, year, src, background, listMovies, onTitleButtonClick} = appProps;
 
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
+          <img src={background} alt={title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -33,7 +33,7 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={title} width="218" height="327" />
+              <img src={src} alt={title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -99,9 +99,10 @@ const Main = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {listMovies.map((movie) => <Films key={movie.title} title={movie.title} onTitleButtonClick = {onTitleButtonClick}/>)}
-          </div>
+          <MoviesList
+            listMovies = {listMovies}
+            onTitleButtonClick = {onTitleButtonClick}
+          />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -127,15 +128,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
-  listMovies: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-      })
-  ).isRequired,
-  onTitleButtonClick: PropTypes.func.isRequired,
+  appProps: appType,
 };
 
 export default Main;

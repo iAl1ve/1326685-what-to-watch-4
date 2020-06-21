@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
+<div
+  className="catalog__movies-list"
+>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="Fantastic Beasts: The Crimes of Grindelwald"
+        height="175"
+        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Fantastic Beasts: The Crimes of Grindelwald
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="Bohemian Rhapsody"
+        height="175"
+        src="img/bohemian-rhapsody.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Bohemian Rhapsody
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="Macbeth"
+        height="175"
+        src="img/macbeth.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Macbeth
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="Aviator"
+        height="175"
+        src="img/aviator.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Aviator
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="Moonrise Kingdom"
+        height="175"
+        src="img/moonrise-kingdom.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Moonrise Kingdom
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="Midnight Special"
+        height="175"
+        src="img/midnight-special.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Midnight Special
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="War of the Worlds"
+        height="175"
+        src="img/war-of-the-worlds.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        War of the Worlds
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <img
+        alt="Shutter Island"
+        height="175"
+        src="img/shutter-island.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        Shutter Island
+      </a>
+    </h3>
+  </article>
+</div>
+`;
