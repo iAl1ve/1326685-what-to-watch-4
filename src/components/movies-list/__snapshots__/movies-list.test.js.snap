@@ -22,11 +22,11 @@ exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[Function]}
       >
         Fantastic Beasts: The Crimes of Grindelwald
       </a>
@@ -50,11 +50,11 @@ exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[Function]}
       >
         Bohemian Rhapsody
       </a>
@@ -78,11 +78,11 @@ exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[Function]}
       >
         Macbeth
       </a>
@@ -106,11 +106,11 @@ exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[Function]}
       >
         Aviator
       </a>
@@ -134,11 +134,11 @@ exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[Function]}
       >
         Moonrise Kingdom
       </a>
@@ -162,11 +162,11 @@ exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[Function]}
       >
         Midnight Special
       </a>
@@ -190,11 +190,11 @@ exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[Function]}
       >
         War of the Worlds
       </a>
@@ -218,11 +218,11 @@ exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[Function]}
       >
         Shutter Island
       </a>

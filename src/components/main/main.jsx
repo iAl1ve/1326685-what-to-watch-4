@@ -1,9 +1,10 @@
 import React from "react";
 import MoviesList from "../movies-list/movies-list.jsx";
-import {appType} from '../../types/index.js';
+import {AppProps} from '../../types/index.js';
 
 const Main = (appProps) => {
-  const {title, genre, year, src, background, listMovies, onTitleButtonClick} = appProps;
+  const {movie, listMovies, onTitleButtonClick} = appProps;
+  const {title, genre, year, src, background} = movie;
 
   return (
     <React.Fragment>
@@ -128,7 +129,7 @@ const Main = (appProps) => {
 };
 
 Main.propTypes = {
-  appProps: appType,
+  appProps: AppProps,
 };
 
 export default Main;

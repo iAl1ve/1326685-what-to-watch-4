@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import MovieCard from "../movie-card/movie-card.jsx";
-import {listMoviesType} from '../../types/index.js';
+import {ListMoviesType} from '../../types/index.js';
+
 
 class MovieList extends PureComponent {
   constructor(listMoviesProps) {
@@ -8,7 +9,7 @@ class MovieList extends PureComponent {
     this.listMoviesProps = listMoviesProps;
 
     this.state = {
-      activeFilm: {},
+      activeCard: {},
     };
   }
 
@@ -24,7 +25,7 @@ class MovieList extends PureComponent {
             onTitleButtonClick = {onTitleButtonClick}
             onMovieCardHover = {() => {
               this.setState({
-                activeFilm: movie,
+                activeCard: movie,
               });
             }}
           />)
@@ -34,7 +35,7 @@ class MovieList extends PureComponent {
 }
 
 MovieList.propTypes = {
-  listMoviesProps: listMoviesType,
+  listMoviesProps: ListMoviesType,
 };
 
 export default MovieList;
