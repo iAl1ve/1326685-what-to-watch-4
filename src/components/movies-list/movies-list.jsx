@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import MovieCard from "../movie-card/movie-card.jsx";
-import {listMoviesType} from '../../types/index.js';
+import {ListMoviesType} from '../../types/index.js';
 
 
 class MovieList extends PureComponent {
@@ -35,7 +35,7 @@ class MovieList extends PureComponent {
 }
 
 MovieList.propTypes = {
-  listMoviesProps: listMoviesType,
+  listMoviesProps: ListMoviesType,
 };
 
 export default MovieList;

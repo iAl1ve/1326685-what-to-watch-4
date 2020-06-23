@@ -1,6 +1,6 @@
 import React from "react";
 import MoviesList from "../movies-list/movies-list.jsx";
-import {movieType} from '../../types/index.js';
+import {AppProps} from '../../types/index.js';
 
 const Main = (appProps) => {
   const {movie, listMovies, onTitleButtonClick} = appProps;
@@ -129,7 +129,7 @@ const Main = (appProps) => {
 };
 
 Main.propTypes = {
-  appProps: movieType,
+  appProps: AppProps,
 };
 
 export default Main;

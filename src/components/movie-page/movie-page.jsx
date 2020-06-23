@@ -1,5 +1,5 @@
 import React from "react";
-import {movieType} from '../../types/index.js';
+import {MovieType} from '../../types/index.js';
 
 const MoviePage = (moviePageProps) => {
   const {movie} = moviePageProps;
@@ -161,7 +161,7 @@ const MoviePage = (moviePageProps) => {
 };
 
 MoviePage.propTypes = {
-  moviePageProps: movieType,
+  moviePageProps: MovieType,
 };
 
 export default MoviePage;

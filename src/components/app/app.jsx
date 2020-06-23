@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
-import {movieType} from '../../types/index.js';
+import {AppProps} from '../../types/index.js';
 import {UrlPage} from "../../const.js";
 
 class App extends PureComponent {
@@ -70,7 +70,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  appProps: movieType,
+  appProps: AppProps,
 };
 
 export default App;

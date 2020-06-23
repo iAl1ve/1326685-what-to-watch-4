@@ -1,5 +1,5 @@
 import React from "react";
-import {listMoviesType} from '../../types/index.js';
+import {ListMoviesType} from '../../types/index.js';
 
 const MovieCard = (listMoviesProps) => {
   const {movie, onTitleButtonClick, onMovieCardHover} = listMoviesProps;
@@ -27,7 +27,7 @@ const MovieCard = (listMoviesProps) => {
 };
 
 MovieCard.propTypes = {
-  listMoviesProps: listMoviesType,
+  listMoviesProps: ListMoviesType,
 };
 
 export default MovieCard;
