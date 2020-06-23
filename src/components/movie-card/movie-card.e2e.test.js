@@ -8,8 +8,17 @@ Enzyme.configure({
 });
 
 const movie = {
-  title: `Moonrise Kingdom`,
-  src: `img/moonrise-kingdom.jpg`,
+  title: `Fantastic Beasts: The Crimes of Grindelwald`,
+  src: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  genre: `drama`,
+  year: 2013,
+  background: `img/bg-the-grand-budapest-hotel.jpg`,
+  ratingScore: `9.1`,
+  ratingLevel: `Very good +`,
+  ratingCount: `146`,
+  movieDescription: `Fantastic Beasts: The Crimes of Grindelwald movie description text. Fantastic Beasts: The Crimes of Grindelwald movie description text. Fantastic Beasts: The Crimes of Grindelwald movie description text. `,
+  movieDirector: `Director: Wes Andreson`,
+  movieStarring: `Starring: Bill Murray, Willem Dafoe and other`,
 };
 
 describe(`MovieCard e2e tests`, () => {
@@ -25,13 +34,19 @@ describe(`MovieCard e2e tests`, () => {
         />
     );
 
-    const movieTitle = filmsComponent.find(`h3.small-movie-card__title`);
+    const mockEvent = {
+      preventDefault() {}
+    };
+
+    const movieTitle = filmsComponent.find(`.small-movie-card__link`);
     const movieImage = filmsComponent.find(`.small-movie-card__image`);
 
-    movieTitle.simulate(`click`);
+    movieTitle.simulate(`click`, mockEvent);
     movieImage.simulate(`mouseenter`);
+    movieImage.simulate(`click`);
 
-    expect(onTitleButtonClick).toHaveBeenCalledTimes(1);
+    expect(onTitleButtonClick.mock.calls.length).toBe(2);
+    expect(onTitleButtonClick.mock.calls[0][0]).toMatchObject(movie);
     expect(onMovieCardHover.mock.calls.length).toBe(1);
     expect(onMovieCardHover).toHaveBeenCalledWith(movie);
   });

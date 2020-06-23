@@ -1,9 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MovieCard from "./movie-card.jsx";
-
-const onTitleButtonClick = () => {};
-const onMovieCardHover = () => {};
+import MoviePage from "./movie-page.jsx";
 
 const movie = {
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
@@ -19,13 +16,11 @@ const movie = {
   movieStarring: `Starring: Bill Murray, Willem Dafoe and other`,
 };
 
-describe(`Test Render MovieCard`, () => {
-  it(`Render MovieCard`, () => {
+describe(`Test Render MoviePage`, () => {
+  it(`Render MoviePage`, () => {
     const tree = renderer
-      .create(<MovieCard
+      .create(<MoviePage
         movie = {movie}
-        onTitleButtonClick = {onTitleButtonClick}
-        onMovieCardHover = {onMovieCardHover}
       />).toJSON();
 
     expect(tree).toMatchSnapshot();

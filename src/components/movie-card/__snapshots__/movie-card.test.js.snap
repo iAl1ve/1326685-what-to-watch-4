@@ -11,21 +11,21 @@ exports[`Test Render MovieCard Render MovieCard 1`] = `
     onMouseLeave={[Function]}
   >
     <img
-      alt="Moonrise Kingdom"
+      alt="Fantastic Beasts: The Crimes of Grindelwald"
       height="175"
-      src="img/moonrise-kingdom.jpg"
+      src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
       width="280"
     />
   </div>
   <h3
     className="small-movie-card__title"
-    onClick={[Function]}
   >
     <a
       className="small-movie-card__link"
       href="movie-page.html"
+      onClick={[Function]}
     >
-      Moonrise Kingdom
+      Fantastic Beasts: The Crimes of Grindelwald
     </a>
   </h3>
 </article>
