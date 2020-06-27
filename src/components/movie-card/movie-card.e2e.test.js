@@ -12,12 +12,15 @@ describe(`MovieCard e2e tests`, () => {
   it(`Should title be clicked`, () => {
     const onTitleButtonClick = jest.fn();
     const onMovieCardHover = jest.fn();
+    const onMouseCardLeave = jest.fn();
 
     const filmsComponent = shallow(
         <MovieCard
           movie = {ListMovies[0]}
+          isPlaying = {false}
           onTitleButtonClick = {onTitleButtonClick}
           onMovieCardHover = {onMovieCardHover}
+          onMouseCardLeave = {onMouseCardLeave}
         />
     );
 
@@ -31,10 +34,12 @@ describe(`MovieCard e2e tests`, () => {
     movieTitle.simulate(`click`, mockEvent);
     movieImage.simulate(`mouseenter`);
     movieImage.simulate(`click`);
+    movieImage.simulate(`mouseleave`);
 
     expect(onTitleButtonClick.mock.calls.length).toBe(2);
     expect(onTitleButtonClick.mock.calls[0][0]).toMatchObject(ListMovies[0]);
     expect(onMovieCardHover.mock.calls.length).toBe(1);
     expect(onMovieCardHover).toHaveBeenCalledWith(ListMovies[0]);
+    expect(onMouseCardLeave.mock.calls.length).toBe(1);
   });
 });

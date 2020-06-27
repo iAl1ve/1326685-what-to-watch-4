@@ -11,6 +11,7 @@ const ListMovies = [
     movieDescription: `Fantastic Beasts: The Crimes of Grindelwald movie description text. Fantastic Beasts: The Crimes of Grindelwald movie description text. Fantastic Beasts: The Crimes of Grindelwald movie description text. `,
     movieDirector: `Director: Wes Andreson`,
     movieStarring: `Starring: Bill Murray, Willem Dafoe and other`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }, {
     title: `Bohemian Rhapsody`,
     src: `img/bohemian-rhapsody.jpg`,
@@ -23,6 +24,7 @@ const ListMovies = [
     movieDescription: `Bohemian Rhapsody movie description text. Bohemian Rhapsody movie description text. Bohemian Rhapsody movie description text. `,
     movieDirector: `Director: Bill Murray`,
     movieStarring: `Starring: Edward Norton, Willem Dafoe and other`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   }, {
     title: `Macbeth`,
     src: `img/macbeth.jpg`,
@@ -35,6 +37,7 @@ const ListMovies = [
     movieDescription: `Macbeth movie description text. Macbeth movie description text. Macbeth movie description text. Macbeth movie description text. `,
     movieDirector: `Director: Macbeth`,
     movieStarring: `Starring: Macbeth, Willem Dafoe and other`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }, {
     title: `Aviator`,
     src: `img/aviator.jpg`,
@@ -47,6 +50,7 @@ const ListMovies = [
     movieDescription: `Aviator movie description text. Aviator movie description text. Aviator movie description text. Aviator movie description text.`,
     movieDirector: `Director: Aviator`,
     movieStarring: `Starring: Aviator, Willem Dafoe and other`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   }, {
     title: `Moonrise Kingdom`,
     src: `img/moonrise-kingdom.jpg`,
@@ -59,6 +63,7 @@ const ListMovies = [
     movieDescription: `Moonrise Kingdom movie description text. Moonrise Kingdom movie description text. Moonrise Kingdom movie description text. Moonrise Kingdom movie description text.`,
     movieDirector: `Director: Moonrise Kingdom`,
     movieStarring: `Starring: Moonrise Kingdom, Willem Dafoe and other`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }, {
     title: `Midnight Special`,
     src: `img/midnight-special.jpg`,
@@ -71,6 +76,7 @@ const ListMovies = [
     movieDescription: `Midnight Special movie description text. Midnight Special movie description text. Midnight Special movie description text. Midnight Special movie description text.`,
     movieDirector: `Director: Midnight Special`,
     movieStarring: `Starring: Midnight Special, Willem Dafoe and other`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   }, {
     title: `War of the Worlds`,
     src: `img/war-of-the-worlds.jpg`,
@@ -83,6 +89,7 @@ const ListMovies = [
     movieDescription: `War of the Worlds movie description text. War of the Worlds movie description text. War of the Worlds movie description text. War of the Worlds movie description text. War of the Worlds movie description text. `,
     movieDirector: `Director: War of the Worlds`,
     movieStarring: `Starring: War of the Worlds, Willem Dafoe and other`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   }, {
     title: `Shutter Island`,
     src: `img/shutter-island.jpg`,
@@ -95,6 +102,7 @@ const ListMovies = [
     movieDescription: `Shutter Island movie description text. Shutter Island movie description text. Shutter Island movie description text. Shutter Island movie description text. `,
     movieDirector: `Director: Shutter Island`,
     movieStarring: `Starring: Shutter Island, Willem Dafoe and other`,
+    preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   }
 ];
 

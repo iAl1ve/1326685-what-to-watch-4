@@ -9,7 +9,6 @@ describe(`Test Render MoviesList`, () => {
       .create(<MoviesList
         listMovies={ListMovies}
         onTitleButtonClick={() => {}}
-        onMovieCardHover={() => {}}
       />)
       .toJSON();
 
