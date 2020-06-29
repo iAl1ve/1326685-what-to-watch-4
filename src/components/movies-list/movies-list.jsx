@@ -27,23 +27,16 @@ class MovieList extends PureComponent {
             isPlaying = {activeTitle === movie.title}
             onTitleButtonClick = {onTitleButtonClick}
             onMovieCardHover = {() => {
-              const timer = setTimeout(() => {
+              setTimeout(() => {
                 this.setState({
                   activeCard: movie,
                 });
               }, PLAYBACK_DELAY);
-
-              this.setState({
-                timerId: timer,
-              });
             }}
             onMouseCardLeave = {() => {
               this.setState({
                 activeCard: {},
-                timerId: null,
               });
-              const {timerId} = this.state.timerId;
-              clearTimeout(timerId);
             }}
           />)
         )}
