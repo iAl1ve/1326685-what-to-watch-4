@@ -35,7 +35,7 @@ class App extends PureComponent {
           <Main
             movie = {movie}
             listMovies = {listMovies}
-            onTitleButtonClick={this._onTitleButtonClick}
+            onTitleButtonClick = {this._onTitleButtonClick}
           />
         );
       case UrlPage.MOVIE_PAGE:
