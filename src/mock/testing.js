@@ -1,5 +1,6 @@
-const ListMovies = [
+export const ListMovies = [
   {
+    id: 1,
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
     src: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `drama`,
@@ -12,7 +13,9 @@ const ListMovies = [
     movieDirector: `Director: Wes Andreson`,
     movieStarring: `Starring: Bill Murray, Willem Dafoe and other`,
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    runTime: `1h 44m`,
   }, {
+    id: 2,
     title: `Bohemian Rhapsody`,
     src: `img/bohemian-rhapsody.jpg`,
     genre: `comedy`,
@@ -25,7 +28,9 @@ const ListMovies = [
     movieDirector: `Director: Bill Murray`,
     movieStarring: `Starring: Edward Norton, Willem Dafoe and other`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    runTime: `1h 53m`,
   }, {
+    id: 3,
     title: `Macbeth`,
     src: `img/macbeth.jpg`,
     genre: `drama`,
@@ -38,7 +43,9 @@ const ListMovies = [
     movieDirector: `Director: Macbeth`,
     movieStarring: `Starring: Macbeth, Willem Dafoe and other`,
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    runTime: `1h 56m`,
   }, {
+    id: 4,
     title: `Aviator`,
     src: `img/aviator.jpg`,
     genre: `documentary`,
@@ -51,7 +58,9 @@ const ListMovies = [
     movieDirector: `Director: Aviator`,
     movieStarring: `Starring: Aviator, Willem Dafoe and other`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    runTime: `1h 31m`,
   }, {
+    id: 5,
     title: `Moonrise Kingdom`,
     src: `img/moonrise-kingdom.jpg`,
     genre: `romance`,
@@ -64,7 +73,9 @@ const ListMovies = [
     movieDirector: `Director: Moonrise Kingdom`,
     movieStarring: `Starring: Moonrise Kingdom, Willem Dafoe and other`,
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    runTime: `1h 39m`,
   }, {
+    id: 6,
     title: `Midnight Special`,
     src: `img/midnight-special.jpg`,
     genre: `crime`,
@@ -77,7 +88,9 @@ const ListMovies = [
     movieDirector: `Director: Midnight Special`,
     movieStarring: `Starring: Midnight Special, Willem Dafoe and other`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    runTime: `2h 34m`,
   }, {
+    id: 7,
     title: `War of the Worlds`,
     src: `img/war-of-the-worlds.jpg`,
     genre: `drama`,
@@ -90,7 +103,9 @@ const ListMovies = [
     movieDirector: `Director: War of the Worlds`,
     movieStarring: `Starring: War of the Worlds, Willem Dafoe and other`,
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    runTime: `1h 39m`,
   }, {
+    id: 8,
     title: `Shutter Island`,
     src: `img/shutter-island.jpg`,
     genre: `drama`,
@@ -103,7 +118,87 @@ const ListMovies = [
     movieDirector: `Director: Shutter Island`,
     movieStarring: `Starring: Shutter Island, Willem Dafoe and other`,
     preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    runTime: `1h 56m`,
   }
 ];
 
-export default ListMovies;
+export const ListReviews = [
+  {
+    id: 1,
+    idFilm: 1,
+    text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    author: `Kate Muir`,
+    date: `2016-12-24`,
+    rating: `7,6`,
+  }, {
+    id: 2,
+    idFilm: 1,
+    text: `The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.`,
+    author: `Matthew Lickona`,
+    date: `2016-12-20`,
+    rating: `8,3`,
+  }, {
+    id: 3,
+    idFilm: 1,
+    text: `Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+    author: `Bill Goodykoontz`,
+    date: `2015-11-18`,
+    rating: `7,3`,
+  },
+  {
+    id: 4,
+    idFilm: 2,
+    text: `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.`,
+    author: `Paula Fleri-Soler`,
+    date: `2016-12-20`,
+    rating: `7,8`,
+  },
+  {
+    id: 5,
+    idFilm: 2,
+    text: `When one of Gustave's lovers dies mysteriously. It is certainly a magical and childlike way of storytelling.`,
+    author: `Amanda Soler`,
+    date: `2016-12-20`,
+    rating: `9,6`,
+  },
+  {
+    id: 6,
+    idFilm: 3,
+    text: `I didn't find it amusing, and while I can appreciate the creativity, it's an hour and 40 minutes I wish I could take back.`,
+    author: `Amanda Greever`,
+    date: `2015-11-18`,
+    rating: `8,9`,
+  },
+  {
+    id: 7,
+    idFilm: 4,
+    text: `Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    author: `Bill Muir`,
+    date: `2016-08-14`,
+    rating: `8,4`,
+  },
+  {
+    id: 8,
+    idFilm: 5,
+    text: `Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs.`,
+    author: `Wes  Dafoe`,
+    date: `2015-11-21`,
+    rating: `5,6`,
+  },
+  {
+    id: 9,
+    idFilm: 2,
+    text: `Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`,
+    author: `Kate Norton`,
+    date: `2015-03-08`,
+    rating: `2`,
+  },
+  {
+    id: 10,
+    idFilm: 1,
+    text: `Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+    author: `Andreson Fleri`,
+    date: `2016-05-09`,
+    rating: `10`,
+  },
+];

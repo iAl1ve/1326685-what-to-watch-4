@@ -1,48 +1,35 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import MovieCard from "../movie-card/movie-card.jsx";
+import {GENRE_DEFAULT} from "../../const.js";
 import {ListMoviesType} from '../../types/index.js';
-import {PLAYBACK_DELAY} from "../../const.js";
 
-class MovieList extends PureComponent {
-  constructor(listMoviesProps) {
-    super(listMoviesProps);
-    this.listMoviesProps = listMoviesProps;
+const MovieList = (listMoviesProps) => {
+  const {listMovies, activeCard, currentGenre, onTitleButtonClick, onMovieCardHover, onMouseCardLeave} = listMoviesProps;
+  const {title} = activeCard;
 
-    this.state = {
-      activeCard: {},
-      timerId: null,
-    };
-  }
+  const getMoviesByGenre = (movies, genre) => {
+    if (genre === GENRE_DEFAULT) {
+      return movies;
+    }
 
-  render() {
-    const {listMovies, onTitleButtonClick} = this.listMoviesProps;
-    const {title: activeTitle} = this.state.activeCard;
+    return movies.filter((film) => film.genre === genre && film.title !== title);
+  };
 
-    return (
-      <div className="catalog__movies-list">
-        {listMovies.map((movie) => (
-          <MovieCard
-            key = {movie.title}
-            movie = {movie}
-            isPlaying = {activeTitle === movie.title}
-            onTitleButtonClick = {onTitleButtonClick}
-            onMovieCardHover = {() => {
-              setTimeout(() => {
-                this.setState({
-                  activeCard: movie,
-                });
-              }, PLAYBACK_DELAY);
-            }}
-            onMouseCardLeave = {() => {
-              this.setState({
-                activeCard: {},
-              });
-            }}
-          />)
-        )}
-      </div>);
-  }
-}
+  return (
+    <div className="catalog__movies-list">
+      {getMoviesByGenre(listMovies, currentGenre).map((movie) => (
+        <MovieCard
+          key = {movie.title + movie.id}
+          movie = {movie}
+          isPlaying = {title === movie.title}
+          onTitleButtonClick = {onTitleButtonClick}
+          onMovieCardHover = {onMovieCardHover}
+          onMouseCardLeave = {onMouseCardLeave}
+        />)
+      )}
+    </div>
+  );
+};
 
 MovieList.propTypes = {
   listMoviesProps: ListMoviesType,

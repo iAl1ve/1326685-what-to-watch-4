@@ -1,14 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MovieCard from "./video-player.jsx";
+import TabsComponent from "./tabs.jsx";
 import {ListMovies} from "../../mock/testing.js";
 
-describe(`Test Render MovieCard`, () => {
-  it(`Render MovieCard`, () => {
+describe(`Test Render Tabs Component`, () => {
+  it(`Render Tabs`, () => {
     const tree = renderer
-      .create(<MovieCard
-        src = {ListMovies[0].src}
-        preview = {ListMovies[0].preview}
+      .create(<TabsComponent
+        movie = {ListMovies[0]}
       />, {
         createNodeMock: () => {
           return {};
