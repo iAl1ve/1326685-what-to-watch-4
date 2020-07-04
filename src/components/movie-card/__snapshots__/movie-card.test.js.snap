@@ -11,9 +11,9 @@ exports[`Test Render MovieCard Render MovieCard 1`] = `
     onMouseLeave={[Function]}
   >
     <img
-      alt="Fantastic Beasts: The Crimes of Grindelwald"
+      alt="The Grand Budapest Hotel"
       height="175"
-      src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      src="img/the-grand-budapest-hotel-poster.jpg"
       width="280"
     />
   </div>
@@ -25,7 +25,7 @@ exports[`Test Render MovieCard Render MovieCard 1`] = `
       href="movie-page.html"
       onClick={[Function]}
     >
-      Fantastic Beasts: The Crimes of Grindelwald
+      The Grand Budapest Hotel
     </a>
   </h3>
 </article>

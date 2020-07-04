@@ -4,9 +4,8 @@ import {Tabs} from '../../const.js';
 
 const withTabs = (Component) => {
   class WithTabs extends PureComponent {
-    constructor(propsTabs) {
-      super(propsTabs);
-      this.propsTabs = propsTabs;
+    constructor(props) {
+      super(props);
 
       this.state = {
         currentTab: Tabs.OVERVIEW,
@@ -25,16 +24,14 @@ const withTabs = (Component) => {
 
       return (
         <Component
-          {...this.propsTabs}
+          {...this.props}
           currentTab = {this.state.currentTab}
           onTabClick = {this.handleTabClick}
         />);
     }
   }
 
-  WithTabs.propTypes = {
-    propsTabs: TabsType,
-  };
+  WithTabs.propTypes = TabsType;
 
   return WithTabs;
 };

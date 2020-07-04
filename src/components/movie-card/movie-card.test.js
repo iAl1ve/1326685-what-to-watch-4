@@ -5,6 +5,7 @@ import {ListMovies} from "../../mock/testing.js";
 
 const onTitleButtonClick = () => {};
 const onMovieCardHover = () => {};
+const onMouseCardLeave = () => {};
 
 describe(`Test Render MovieCard`, () => {
   it(`Render MovieCard`, () => {
@@ -14,6 +15,7 @@ describe(`Test Render MovieCard`, () => {
         isPlaying = {false}
         onTitleButtonClick = {onTitleButtonClick}
         onMovieCardHover = {onMovieCardHover}
+        onMouseCardLeave = {onMouseCardLeave}
       />, {
         createNodeMock: () => {
           return {};

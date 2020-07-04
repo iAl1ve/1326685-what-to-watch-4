@@ -9,7 +9,7 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="Fantastic Beasts: The Crimes of Grindelwald"
+        alt="The Grand Budapest Hotel"
         src="img/bg-the-grand-budapest-hotel.jpg"
       />
     </div>
@@ -69,9 +69,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="Fantastic Beasts: The Crimes of Grindelwald"
+            alt="The Grand Budapest Hotel"
             height="327"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
           />
         </div>
@@ -81,7 +81,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            Fantastic Beasts: The Crimes of Grindelwald
+            The Grand Budapest Hotel
           </h2>
           <p
             className="movie-card__meta"
@@ -89,12 +89,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              drama
+              Comedy
             </span>
             <span
               className="movie-card__year"
             >
-              2013
+              1996
             </span>
           </p>
           <div
@@ -257,6 +257,34 @@ Array [
       <div
         className="catalog__movies-list"
       >
+        <article
+          className="small-movie-card catalog__movies-card"
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <img
+              alt="The Grand Budapest Hotel"
+              height="175"
+              src="img/the-grand-budapest-hotel-poster.jpg"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+              onClick={[Function]}
+            >
+              The Grand Budapest Hotel
+            </a>
+          </h3>
+        </article>
         <article
           className="small-movie-card catalog__movies-card"
         >
@@ -450,34 +478,6 @@ Array [
               onClick={[Function]}
             >
               War of the Worlds
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <img
-              alt="Shutter Island"
-              height="175"
-              src="img/shutter-island.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Shutter Island
             </a>
           </h3>
         </article>

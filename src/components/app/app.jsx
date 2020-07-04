@@ -6,15 +6,14 @@ import {AppType} from '../../types/index.js';
 import {UrlPage, MAX_SHOW_MORE_FILMS} from "../../const.js";
 
 class App extends PureComponent {
-  constructor(appProps) {
-    super(appProps);
-    this.appProps = appProps;
+  constructor(props) {
+    super(props);
 
     this._onTitleButtonClick = this._onTitleButtonClick.bind(this);
 
     this.state = {
       activePage: UrlPage.MAIN,
-      activeFilm: this.appProps.movie,
+      activeFilm: this.props.movie,
     };
   }
 
@@ -26,12 +25,12 @@ class App extends PureComponent {
   }
 
   _getCommentsById(id) {
-    const {listReviews} = this.appProps;
+    const {listReviews} = this.props;
     return listReviews.filter((review) => review.idFilm === id);
   }
 
   _renderAppScreen() {
-    const {movie, listMovies, currentGenre} = this.appProps;
+    const {movie, listMovies, currentGenre} = this.props;
 
     const {activePage, activeFilm} = this.state;
 
@@ -61,7 +60,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {currentGenre, listMovies} = this.appProps;
+    const {currentGenre, listMovies} = this.props;
 
     return (
       <BrowserRouter>
@@ -84,9 +83,7 @@ class App extends PureComponent {
   }
 }
 
-App.propTypes = {
-  appProps: AppType,
-};
+App.propTypes = AppType;
 
 export default App;
 

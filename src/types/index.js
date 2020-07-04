@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const {shape, number, string, arrayOf, bool, func, instanceOf} = PropTypes;
+const {shape, number, string, arrayOf, bool, func, any} = PropTypes;
 
 export const MovieType = shape({
   id: number.isRequired,
@@ -19,46 +19,55 @@ export const MovieType = shape({
   runTime: string.isRequired,
 });
 
-export const ReviewsType = shape({
+export const ReviewType = shape({
   id: number.isRequired,
   idFilm: number.isRequired,
   text: string.isRequired,
   author: string.isRequired,
-  date: instanceOf(Date),
+  date: string.isRequired,
   rating: string.isRequired,
 });
 
-export const ListMoviesType = shape({
-  listMovies: arrayOf(MovieType).isRequired,
-  isPlaying: bool.isRequired,
+export const ReviewsType = {
+  reviews: arrayOf(ReviewType),
+};
+
+export const ListMoviesType = {
+  listMovies: arrayOf(MovieType),
+  isPlaying: bool,
   onTitleButtonClick: func.isRequired,
   onMovieCardHover: func.isRequired,
   onMouseCardLeave: func.isRequired,
-  activeCard: MovieType.isRequired,
-});
+  activeCard: any,
+};
 
-export const AppType = shape({
-  movie: MovieType.isRequired,
-  listReviews: arrayOf(ReviewsType).isRequired,
-  listMovies: arrayOf(MovieType).isRequired,
-  onTitleButtonClick: func.isRequired,
+export const AppType = {
+  movie: MovieType,
+  listReviews: arrayOf(ReviewType),
+  listMovies: arrayOf(MovieType),
   currentGenre: string.isRequired,
-});
+};
 
-export const VideoType = shape({
+export const WithMoviesListType = {
+  activeCard: any,
+  onMovieCardHover: func,
+  onMouseCardLeave: func,
+};
+
+export const VideoType = {
   src: string.isRequired,
   preview: string.isRequired,
-});
+};
 
-export const TabsType = shape({
-  currentTab: string.isRequired,
-  onTabClick: func.isRequired,
-});
+export const TabsType = {
+  currentTab: string,
+  onTabClick: func,
+};
 
-export const TabsComponentType = shape({
+export const TabsComponentType = {
   movie: MovieType.isRequired,
-  listReviews: arrayOf(ReviewsType).isRequired,
+  listReviews: arrayOf(ReviewType),
   currentTab: string.isRequired,
   onTabClick: func.isRequired,
-});
+};
 

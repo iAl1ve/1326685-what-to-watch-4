@@ -5,8 +5,8 @@ import {AppType} from '../../types/index.js';
 
 const MoviesListWrapped = withMoviesList(MoviesList);
 
-const Main = (appProps) => {
-  const {movie, listMovies, onTitleButtonClick} = appProps;
+const Main = (props) => {
+  const {movie, listMovies, onTitleButtonClick} = props;
   const {title, genre, year, src, background} = movie;
 
   return (
@@ -131,8 +131,6 @@ const Main = (appProps) => {
   );
 };
 
-Main.propTypes = {
-  appProps: AppType,
-};
+Main.propTypes = AppType;
 
 export default Main;

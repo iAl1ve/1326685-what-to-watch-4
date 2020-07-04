@@ -9,8 +9,8 @@ import {AppType} from '../../types/index.js';
 const TabsWrapped = withTabs(TabsComponent);
 const MoviesListWrapped = withMoviesList(MoviesList);
 
-const MoviePage = (moviePageProps) => {
-  const {movie, listMovies, onTitleButtonClick} = moviePageProps;
+const MoviePage = (props) => {
+  const {movie, listMovies, onTitleButtonClick} = props;
   const {title, genre, year, src, background} = movie;
   const similarGenreFimls = listMovies.filter((film) => film.genre === genre && film.title !== title).slice(0, MAX_COUNT_FILMS);
 
@@ -74,7 +74,7 @@ const MoviePage = (moviePageProps) => {
             </div>
 
             <TabsWrapped
-              {...moviePageProps}
+              {...props}
             />
 
           </div>
@@ -110,8 +110,6 @@ const MoviePage = (moviePageProps) => {
   );
 };
 
-MoviePage.propTypes = {
-  moviePageProps: AppType,
-};
+MoviePage.propTypes = AppType;
 
 export default MoviePage;

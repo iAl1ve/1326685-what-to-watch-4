@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react';
-import {ListMoviesType} from '../../types/index.js';
+import {WithMoviesListType} from '../../types/index.js';
 import {PLAYBACK_DELAY} from "../../const.js";
 
 const withMovieList = (Component) => {
   class WithMoviesList extends PureComponent {
-    constructor(propsMovieList) {
-      super(propsMovieList);
-      this.propsMovieList = propsMovieList;
+    constructor(props) {
+      super(props);
+
       this.timerId = null;
 
       this.state = {
@@ -39,7 +39,7 @@ const withMovieList = (Component) => {
     render() {
       return (
         <Component
-          {...this.propsMovieList}
+          {...this.props}
           activeCard = {this.state.activeCard}
           onMovieCardHover = {this.handleMovieCardHover}
           onMouseCardLeave = {this.handleMouseCardLeave}
@@ -47,9 +47,7 @@ const withMovieList = (Component) => {
     }
   }
 
-  WithMoviesList.propTypes = {
-    propsMovieList: ListMoviesType,
-  };
+  WithMoviesList.propTypes = WithMoviesListType;
 
   return WithMoviesList;
 };

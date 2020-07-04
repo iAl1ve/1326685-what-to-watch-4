@@ -2,8 +2,8 @@ import React from "react";
 import {ReviewsType} from '../../types/index.js';
 import {formatDate} from '../../util.js';
 
-const Reviews = (reviewsProps) => {
-  const {reviews} = reviewsProps;
+const Reviews = (props) => {
+  const {reviews} = props;
 
   return (
     <React.Fragment>
@@ -31,8 +31,6 @@ const Reviews = (reviewsProps) => {
   );
 };
 
-Reviews.propTypes = {
-  reviewsProps: ReviewsType,
-};
+Reviews.propTypes = ReviewsType;
 
 export default Reviews;

@@ -3,12 +3,12 @@ import {TabsComponentType} from '../../types/index.js';
 import Reviews from "../reviews/reviews.jsx";
 import {Tabs} from '../../const.js';
 
-const TabsComponent = (propsTabs) => {
-  const {movie, listReviews, currentTab, onTabClick} = propsTabs;
+const TabsComponent = (props) => {
+  const {movie: film, listReviews, currentTab, onTabClick} = props;
   const tabs = Object.values(Tabs);
 
   const getComponentByTab = (tab) => {
-    const {genre, year, ratingScore, ratingLevel, ratingCount, movieDescription, movieDirector, movieStarring, runTime} = movie;
+    const {genre, year, ratingScore, ratingLevel, ratingCount, movieDescription, movieDirector, movieStarring, runTime} = film;
 
     switch (tab) {
       case Tabs.OVERVIEW:
@@ -71,16 +71,17 @@ const TabsComponent = (propsTabs) => {
           </React.Fragment>
         );
       case Tabs.REVIEWS:
-        const halfIndex = Math.ceil(listReviews.length / 2);
+        const reviews = listReviews;
+        const halfIndex = Math.ceil(reviews.length / 2);
 
         return (
           <React.Fragment>
             <div className="movie-card__reviews movie-card__row">
               <Reviews
-                reviews = {listReviews.slice(0, halfIndex)}
+                reviews = {reviews.slice(0, halfIndex)}
               />
               <Reviews
-                reviews = {listReviews.slice(halfIndex)}
+                reviews = {reviews.slice(halfIndex)}
               />
             </div>
           </React.Fragment>
@@ -115,8 +116,6 @@ const TabsComponent = (propsTabs) => {
   );
 };
 
-TabsComponent.propTypes = {
-  propsTabs: TabsComponentType,
-};
+TabsComponent.propTypes = TabsComponentType;
 
 export default TabsComponent;
