@@ -32,6 +32,10 @@ const withMovieList = (Component) => {
       });
     }
 
+    componentWillUnmount() {
+      clearTimeout(this.timerId);
+    }
+
     render() {
       return (
         <Component
