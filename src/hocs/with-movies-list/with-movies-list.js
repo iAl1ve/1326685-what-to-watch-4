@@ -7,6 +7,7 @@ const withMovieList = (Component) => {
     constructor(propsMovieList) {
       super(propsMovieList);
       this.propsMovieList = propsMovieList;
+      this.timerId = null;
 
       this.state = {
         activeCard: {},
@@ -17,7 +18,7 @@ const withMovieList = (Component) => {
     }
 
     handleMovieCardHover(movie) {
-      setTimeout(() => {
+      this.timerId = setTimeout(() => {
         this.setState({
           activeCard: movie,
         });
@@ -25,6 +26,7 @@ const withMovieList = (Component) => {
     }
 
     handleMouseCardLeave() {
+      clearTimeout(this.timerId);
       this.setState({
         activeCard: {},
       });

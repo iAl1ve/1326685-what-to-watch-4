@@ -6,7 +6,7 @@ import {AppType} from '../../types/index.js';
 const MoviesListWrapped = withMoviesList(MoviesList);
 
 const Main = (appProps) => {
-  const {movie, listMovies, onTitleButtonClick, currentGenre} = appProps;
+  const {movie, listMovies, onTitleButtonClick} = appProps;
   const {title, genre, year, src, background} = movie;
 
   return (
@@ -106,7 +106,6 @@ const Main = (appProps) => {
           <MoviesListWrapped
             listMovies = {listMovies}
             onTitleButtonClick = {onTitleButtonClick}
-            currentGenre = {currentGenre}
           />
 
           <div className="catalog__more">

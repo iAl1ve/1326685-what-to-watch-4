@@ -21,12 +21,6 @@ const withTabs = (Component) => {
       });
     }
 
-    handleMouseCardLeave() {
-      this.setState({
-        activeCard: {},
-      });
-    }
-
     render() {
 
       return (

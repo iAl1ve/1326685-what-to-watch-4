@@ -12,6 +12,7 @@ const MoviesListWrapped = withMoviesList(MoviesList);
 const MoviePage = (moviePageProps) => {
   const {movie, listMovies, onTitleButtonClick} = moviePageProps;
   const {title, genre, year, src, background} = movie;
+  const similarGenreFimls = listMovies.filter((film) => film.genre === genre && film.title !== title).slice(0, MAX_COUNT_FILMS);
 
   return (
     <React.Fragment>
@@ -85,9 +86,8 @@ const MoviePage = (moviePageProps) => {
           <h2 className="catalog__title">More like this</h2>
 
           <MoviesListWrapped
-            listMovies = {listMovies.filter((film) => film.genre === genre && film.title !== title).slice(0, MAX_COUNT_FILMS)}
+            listMovies = {similarGenreFimls}
             onTitleButtonClick = {onTitleButtonClick}
-            currentGenre = {genre}
           />
 
         </section>

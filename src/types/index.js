@@ -34,7 +34,6 @@ export const ListMoviesType = shape({
   onTitleButtonClick: func.isRequired,
   onMovieCardHover: func.isRequired,
   onMouseCardLeave: func.isRequired,
-  currentGenre: string.isRequired,
   activeCard: MovieType.isRequired,
 });
 
