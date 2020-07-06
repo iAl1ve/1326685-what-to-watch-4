@@ -1,51 +1,27 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import MovieCard from "../movie-card/movie-card.jsx";
 import {ListMoviesType} from '../../types/index.js';
-import {PLAYBACK_DELAY} from "../../const.js";
 
-class MovieList extends PureComponent {
-  constructor(listMoviesProps) {
-    super(listMoviesProps);
-    this.listMoviesProps = listMoviesProps;
+const MovieList = (props) => {
+  const {listMovies, activeCard, onTitleButtonClick, onMovieCardHover, onMouseCardLeave} = props;
+  const {title} = activeCard;
 
-    this.state = {
-      activeCard: {},
-      timerId: null,
-    };
-  }
-
-  render() {
-    const {listMovies, onTitleButtonClick} = this.listMoviesProps;
-    const {title: activeTitle} = this.state.activeCard;
-
-    return (
-      <div className="catalog__movies-list">
-        {listMovies.map((movie) => (
-          <MovieCard
-            key = {movie.title}
-            movie = {movie}
-            isPlaying = {activeTitle === movie.title}
-            onTitleButtonClick = {onTitleButtonClick}
-            onMovieCardHover = {() => {
-              setTimeout(() => {
-                this.setState({
-                  activeCard: movie,
-                });
-              }, PLAYBACK_DELAY);
-            }}
-            onMouseCardLeave = {() => {
-              this.setState({
-                activeCard: {},
-              });
-            }}
-          />)
-        )}
-      </div>);
-  }
-}
-
-MovieList.propTypes = {
-  listMoviesProps: ListMoviesType,
+  return (
+    <div className="catalog__movies-list">
+      {listMovies.map((movie) => (
+        <MovieCard
+          key = {movie.title + movie.id}
+          movie = {movie}
+          isPlaying = {title === movie.title}
+          onTitleButtonClick = {onTitleButtonClick}
+          onMovieCardHover = {onMovieCardHover}
+          onMouseCardLeave = {onMouseCardLeave}
+        />)
+      )}
+    </div>
+  );
 };
+
+MovieList.propTypes = ListMoviesType;
 
 export default MovieList;

@@ -1,9 +1,12 @@
 import React from "react";
 import MoviesList from "../movies-list/movies-list.jsx";
-import {AppProps} from '../../types/index.js';
+import withMoviesList from "../../hocs/with-movies-list/with-movies-list.js";
+import {AppType} from '../../types/index.js';
 
-const Main = (appProps) => {
-  const {movie, listMovies, onTitleButtonClick} = appProps;
+const MoviesListWrapped = withMoviesList(MoviesList);
+
+const Main = (props) => {
+  const {movie, listMovies, onTitleButtonClick} = props;
   const {title, genre, year, src, background} = movie;
 
   return (
@@ -100,7 +103,7 @@ const Main = (appProps) => {
             </li>
           </ul>
 
-          <MoviesList
+          <MoviesListWrapped
             listMovies = {listMovies}
             onTitleButtonClick = {onTitleButtonClick}
           />
@@ -128,8 +131,6 @@ const Main = (appProps) => {
   );
 };
 
-Main.propTypes = {
-  appProps: AppProps,
-};
+Main.propTypes = AppType;
 
 export default Main;

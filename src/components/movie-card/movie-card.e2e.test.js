@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MovieCard from "./movie-card.jsx";
-import ListMovies from "../../mock/testing.js";
+import {ListMovies} from "../../mock/testing.js";
 
 Enzyme.configure({
   adapter: new Adapter(),

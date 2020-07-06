@@ -1,10 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MovieCard from "./movie-card.jsx";
-import ListMovies from "../../mock/testing.js";
+import {ListMovies} from "../../mock/testing.js";
 
 const onTitleButtonClick = () => {};
 const onMovieCardHover = () => {};
+const onMouseCardLeave = () => {};
 
 describe(`Test Render MovieCard`, () => {
   it(`Render MovieCard`, () => {
@@ -14,7 +15,12 @@ describe(`Test Render MovieCard`, () => {
         isPlaying = {false}
         onTitleButtonClick = {onTitleButtonClick}
         onMovieCardHover = {onMovieCardHover}
-      />).toJSON();
+        onMouseCardLeave = {onMouseCardLeave}
+      />, {
+        createNodeMock: () => {
+          return {};
+        }
+      }).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

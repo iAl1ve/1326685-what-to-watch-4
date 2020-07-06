@@ -3,15 +3,14 @@ import {VideoType} from '../../types/index.js';
 import {VIDEO_SIZE} from "../../const.js";
 
 class VideoPlayer extends PureComponent {
-  constructor(videoProps) {
-    super(videoProps);
-    this.videoProps = videoProps;
+  constructor(props) {
+    super(props);
 
     this._videoRef = createRef();
   }
 
   componentDidMount() {
-    const {src, preview} = this.videoProps;
+    const {src, preview} = this.props;
     const video = this._videoRef.current;
 
     video.src = preview;
@@ -38,8 +37,6 @@ class VideoPlayer extends PureComponent {
   }
 }
 
-VideoPlayer.propTypes = {
-  videoProps: VideoType,
-};
+VideoPlayer.propTypes = VideoType;
 
 export default VideoPlayer;

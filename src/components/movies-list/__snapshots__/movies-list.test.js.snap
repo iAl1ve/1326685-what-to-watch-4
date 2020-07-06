@@ -13,6 +13,32 @@ exports[`Test Render MoviesList Should MoviesList render correctly 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
+      <video
+        autoPlay={true}
+        muted={true}
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+        onClick={[Function]}
+      >
+        The Grand Budapest Hotel
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
       <img
         alt="Fantastic Beasts: The Crimes of Grindelwald"
         height="175"

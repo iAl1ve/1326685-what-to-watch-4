@@ -2,19 +2,18 @@ import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
-import {AppProps} from '../../types/index.js';
-import {UrlPage} from "../../const.js";
+import {AppType} from '../../types/index.js';
+import {UrlPage, MAX_SHOW_MORE_FILMS} from "../../const.js";
 
 class App extends PureComponent {
-  constructor(appProps) {
-    super(appProps);
-    this.appProps = appProps;
+  constructor(props) {
+    super(props);
 
     this._onTitleButtonClick = this._onTitleButtonClick.bind(this);
 
     this.state = {
       activePage: UrlPage.MAIN,
-      activeFilm: this.appProps.movie,
+      activeFilm: this.props.movie,
     };
   }
 
@@ -25,8 +24,14 @@ class App extends PureComponent {
     });
   }
 
+  _getCommentsById(id) {
+    const {listReviews} = this.props;
+    return listReviews.filter((review) => review.idFilm === id);
+  }
+
   _renderAppScreen() {
-    const {movie, listMovies} = this.appProps;
+    const {movie, listMovies, currentGenre} = this.props;
+
     const {activePage, activeFilm} = this.state;
 
     switch (activePage) {
@@ -34,14 +39,19 @@ class App extends PureComponent {
         return (
           <Main
             movie = {movie}
-            listMovies = {listMovies}
+            listMovies = {listMovies.slice(0, MAX_SHOW_MORE_FILMS)}
             onTitleButtonClick = {this._onTitleButtonClick}
+            currentGenre = {currentGenre}
           />
         );
       case UrlPage.MOVIE_PAGE:
         return (
           <MoviePage
             movie = {activeFilm}
+            listMovies = {listMovies}
+            listReviews = {this._getCommentsById(activeFilm.id)}
+            onTitleButtonClick = {this._onTitleButtonClick}
+            currentGenre = {currentGenre}
           />
         );
       default:
@@ -50,7 +60,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {activeFilm} = this.state;
+    const {currentGenre, listMovies} = this.props;
 
     return (
       <BrowserRouter>
@@ -60,7 +70,11 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-film">
             <MoviePage
-              movie = {activeFilm}
+              movie = {listMovies[0]}
+              listMovies = {listMovies}
+              listReviews = {this._getCommentsById(listMovies[0].id)}
+              onTitleButtonClick = {this._onTitleButtonClick}
+              currentGenre = {currentGenre}
             />
           </Route>
         </Switch>
@@ -69,9 +83,7 @@ class App extends PureComponent {
   }
 }
 
-App.propTypes = {
-  appProps: AppProps,
-};
+App.propTypes = AppType;
 
 export default App;
 
