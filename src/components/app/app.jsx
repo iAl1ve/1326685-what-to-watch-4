@@ -1,66 +1,50 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {AppType} from '../../types/index.js';
-import {UrlPage, MAX_SHOW_MORE_FILMS} from "../../const.js";
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this._onTitleButtonClick = this._onTitleButtonClick.bind(this);
-
-    this.state = {
-      activePage: UrlPage.MAIN,
-      activeFilm: this.props.movie,
-    };
-  }
-
-  _onTitleButtonClick(film) {
-    this.setState({
-      activePage: UrlPage.MOVIE_PAGE,
-      activeFilm: film,
-    });
-  }
-
   _getCommentsById(id) {
     const {listReviews} = this.props;
     return listReviews.filter((review) => review.idFilm === id);
   }
 
   _renderAppScreen() {
-    const {movie, listMovies, currentGenre} = this.props;
+    const {listMovies, currentGenre, activeFilm, listGenres, onTitleButtonClick, onGenreItemClick} = this.props;
 
-    const {activePage, activeFilm} = this.state;
-
-    switch (activePage) {
-      case UrlPage.MAIN:
-        return (
-          <Main
-            movie = {movie}
-            listMovies = {listMovies.slice(0, MAX_SHOW_MORE_FILMS)}
-            onTitleButtonClick = {this._onTitleButtonClick}
-            currentGenre = {currentGenre}
-          />
-        );
-      case UrlPage.MOVIE_PAGE:
-        return (
-          <MoviePage
-            movie = {activeFilm}
-            listMovies = {listMovies}
-            listReviews = {this._getCommentsById(activeFilm.id)}
-            onTitleButtonClick = {this._onTitleButtonClick}
-            currentGenre = {currentGenre}
-          />
-        );
-      default:
-        return null;
+    if (activeFilm === null) {
+      return (
+        <Main
+          movie = {listMovies[0]}
+          listMovies = {listMovies}
+          onTitleButtonClick = {onTitleButtonClick}
+          currentGenre = {currentGenre}
+          listGenres = {listGenres}
+          onGenreItemClick = {onGenreItemClick}
+        />
+      );
     }
+
+    if (activeFilm) {
+      return (
+        <MoviePage
+          movie = {activeFilm}
+          listMovies = {listMovies}
+          listReviews = {this._getCommentsById(activeFilm.id)}
+          onTitleButtonClick = {onTitleButtonClick}
+          currentGenre = {currentGenre}
+        />
+      );
+    }
+
+    return null;
   }
 
   render() {
-    const {currentGenre, listMovies} = this.props;
+    const {currentGenre, listMovies, onTitleButtonClick} = this.props;
 
     return (
       <BrowserRouter>
@@ -73,7 +57,7 @@ class App extends PureComponent {
               movie = {listMovies[0]}
               listMovies = {listMovies}
               listReviews = {this._getCommentsById(listMovies[0].id)}
-              onTitleButtonClick = {this._onTitleButtonClick}
+              onTitleButtonClick = {onTitleButtonClick}
               currentGenre = {currentGenre}
             />
           </Route>
@@ -85,5 +69,23 @@ class App extends PureComponent {
 
 App.propTypes = AppType;
 
-export default App;
+const mapStateToProps = (state) => ({
+  currentGenre: state.currentGenre,
+  activeFilm: state.activeFilm,
+  listMovies: state.listMovies,
+  listReviews: state.listReviews,
+  listGenres: state.listGenres,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onTitleButtonClick(film) {
+    dispatch(ActionCreator.setActiveMovie(film));
+  },
+  onGenreItemClick(genre) {
+    dispatch(ActionCreator.changeCurrentGenre(genre));
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 

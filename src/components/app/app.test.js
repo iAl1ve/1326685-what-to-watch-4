@@ -1,25 +1,40 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
-import {ListMovies} from "../../mock/testing.js";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import {App} from "./app.jsx";
+import {ListMovies, ListReviews, listGenres} from "../../mock/testing.js";
 import {GENRE_DEFAULT} from "../../const.js";
 
-const onTitleButtonClick = () => {};
+const mockStore = configureStore([]);
 
 describe(`Test Render App`, () => {
   it(`Render App`, () => {
+    const store = mockStore({
+      curretGenre: GENRE_DEFAULT,
+      activeFilm: null,
+      listMovies: ListMovies,
+      listReviews: ListReviews,
+      listGenres,
+    });
+
     const tree = renderer
-      .create(<App
-        movie = {ListMovies[0]}
-        listMovies = {ListMovies}
-        listReviews = {[]}
-        onTitleButtonClick = {onTitleButtonClick}
-        currentGenre = {GENRE_DEFAULT}
-      />, {
-        createNodeMock: () => {
-          return {};
-        }
-      }).toJSON();
+      .create(
+          <Provider store = {store}>
+            <App
+              movie = {ListMovies[0]}
+              listMovies = {ListMovies}
+              listReviews = {ListReviews}
+              onTitleButtonClick = {() => {}}
+              onGenreItemClick = {() => {}}
+              currentGenre = {GENRE_DEFAULT}
+              listGenres = {listGenres}
+            />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          }).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

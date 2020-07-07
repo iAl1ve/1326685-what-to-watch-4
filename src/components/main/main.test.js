@@ -1,10 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
-import {ListMovies} from "../../mock/testing.js";
+import {ListMovies, listGenres} from "../../mock/testing.js";
 import {GENRE_DEFAULT} from "../../const.js";
-
-const onTitleButtonClick = () => {};
 
 describe(`Test Render Main`, () => {
   it(`Render Main`, () => {
@@ -12,7 +10,9 @@ describe(`Test Render Main`, () => {
       .create(<Main
         movie = {ListMovies[0]}
         listMovies = {ListMovies}
-        onTitleButtonClick = {onTitleButtonClick}
+        listGenres = {listGenres}
+        onTitleButtonClick = {() => {}}
+        onGenreItemClick = {() => {}}
         currentGenre = {GENRE_DEFAULT}
       />, {
         createNodeMock: () => {

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const {shape, number, string, arrayOf, bool, func, any} = PropTypes;
+const {shape, number, string, arrayOf, array, bool, func, any} = PropTypes;
 
 export const MovieType = shape({
   id: number.isRequired,
@@ -45,7 +45,17 @@ export const AppType = {
   movie: MovieType,
   listReviews: arrayOf(ReviewType),
   listMovies: arrayOf(MovieType),
+  listGenres: array.isRequired,
   currentGenre: string.isRequired,
+  onTitleButtonClick: func.isRequired,
+  onGenreItemClick: func.isRequired,
+};
+
+export const MoviePageType = {
+  movie: MovieType,
+  listReviews: arrayOf(ReviewType),
+  listMovies: arrayOf(MovieType),
+  onTitleButtonClick: func.isRequired,
 };
 
 export const WithMoviesListType = {
@@ -71,3 +81,8 @@ export const TabsComponentType = {
   onTabClick: func.isRequired,
 };
 
+export const GenresType = {
+  currentGenre: string.isRequired,
+  listGenres: array.isRequired,
+  onGenreItemClick: func.isRequired,
+};

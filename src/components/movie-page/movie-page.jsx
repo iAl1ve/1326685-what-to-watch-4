@@ -4,7 +4,8 @@ import withTabs from "../../hocs/with-tabs/with-tabs.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withMoviesList from "../../hocs/with-movies-list/with-movies-list.js";
 import {MAX_COUNT_FILMS} from "../../const.js";
-import {AppType} from '../../types/index.js';
+import {getSimilarGenreFilms} from "../../utils.js";
+import {MoviePageType} from '../../types/index.js';
 
 const TabsWrapped = withTabs(TabsComponent);
 const MoviesListWrapped = withMoviesList(MoviesList);
@@ -12,7 +13,7 @@ const MoviesListWrapped = withMoviesList(MoviesList);
 const MoviePage = (props) => {
   const {movie, listMovies, onTitleButtonClick} = props;
   const {title, genre, year, src, background} = movie;
-  const similarGenreFimls = listMovies.filter((film) => film.genre === genre && film.title !== title).slice(0, MAX_COUNT_FILMS);
+  const similarGenreFilms = getSimilarGenreFilms(listMovies, genre, title).slice(0, MAX_COUNT_FILMS);
 
   return (
     <React.Fragment>
@@ -86,7 +87,7 @@ const MoviePage = (props) => {
           <h2 className="catalog__title">More like this</h2>
 
           <MoviesListWrapped
-            listMovies = {similarGenreFimls}
+            listMovies = {similarGenreFilms}
             onTitleButtonClick = {onTitleButtonClick}
           />
 
@@ -110,6 +111,6 @@ const MoviePage = (props) => {
   );
 };
 
-MoviePage.propTypes = AppType;
+MoviePage.propTypes = MoviePageType;
 
 export default MoviePage;

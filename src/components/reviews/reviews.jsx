@@ -1,6 +1,6 @@
 import React from "react";
 import {ReviewsType} from '../../types/index.js';
-import {formatDate} from '../../util.js';
+import {formatDate} from '../../utils.js';
 
 const Reviews = (props) => {
   const {reviews} = props;
