@@ -7,11 +7,6 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import {AppType} from '../../types/index.js';
 
 class App extends PureComponent {
-  _getCommentsById(id) {
-    const {listReviews} = this.props;
-    return listReviews.filter((review) => review.idFilm === id);
-  }
-
   _renderAppScreen() {
     const {listMovies, currentGenre, activeFilm, listGenres, onTitleButtonClick, onGenreItemClick} = this.props;
 
@@ -33,7 +28,6 @@ class App extends PureComponent {
         <MoviePage
           movie = {activeFilm}
           listMovies = {listMovies}
-          listReviews = {this._getCommentsById(activeFilm.id)}
           onTitleButtonClick = {onTitleButtonClick}
           currentGenre = {currentGenre}
         />
@@ -56,7 +50,6 @@ class App extends PureComponent {
             <MoviePage
               movie = {listMovies[0]}
               listMovies = {listMovies}
-              listReviews = {this._getCommentsById(listMovies[0].id)}
               onTitleButtonClick = {onTitleButtonClick}
               currentGenre = {currentGenre}
             />
@@ -73,7 +66,6 @@ const mapStateToProps = (state) => ({
   currentGenre: state.currentGenre,
   activeFilm: state.activeFilm,
   listMovies: state.listMovies,
-  listReviews: state.listReviews,
   listGenres: state.listGenres,
 });
 

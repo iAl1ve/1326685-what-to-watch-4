@@ -43,7 +43,6 @@ export const ListMoviesType = {
 
 export const AppType = {
   movie: MovieType,
-  listReviews: arrayOf(ReviewType),
   listMovies: arrayOf(MovieType),
   listGenres: array.isRequired,
   currentGenre: string.isRequired,
@@ -53,25 +52,13 @@ export const AppType = {
 
 export const MoviePageType = {
   movie: MovieType,
-  listReviews: arrayOf(ReviewType),
   listMovies: arrayOf(MovieType),
   onTitleButtonClick: func.isRequired,
-};
-
-export const WithMoviesListType = {
-  activeCard: any,
-  onMovieCardHover: func,
-  onMouseCardLeave: func,
 };
 
 export const VideoType = {
   src: string.isRequired,
   preview: string.isRequired,
-};
-
-export const TabsType = {
-  currentTab: string,
-  onTabClick: func,
 };
 
 export const TabsComponentType = {

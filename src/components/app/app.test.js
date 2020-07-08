@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
-import {ListMovies, ListReviews, listGenres} from "../../mock/testing.js";
+import {ListMovies, listGenres} from "../../mock/testing.js";
 import {GENRE_DEFAULT} from "../../const.js";
 
 const mockStore = configureStore([]);
@@ -14,7 +14,6 @@ describe(`Test Render App`, () => {
       curretGenre: GENRE_DEFAULT,
       activeFilm: null,
       listMovies: ListMovies,
-      listReviews: ListReviews,
       listGenres,
     });
 
@@ -24,7 +23,6 @@ describe(`Test Render App`, () => {
             <App
               movie = {ListMovies[0]}
               listMovies = {ListMovies}
-              listReviews = {ListReviews}
               onTitleButtonClick = {() => {}}
               onGenreItemClick = {() => {}}
               currentGenre = {GENRE_DEFAULT}

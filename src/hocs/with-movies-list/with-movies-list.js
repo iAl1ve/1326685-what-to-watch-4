@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import {WithMoviesListType} from '../../types/index.js';
 import {PLAYBACK_DELAY} from "../../const.js";
 
 const withMovieList = (Component) => {
@@ -47,7 +46,7 @@ const withMovieList = (Component) => {
     }
   }
 
-  WithMoviesList.propTypes = WithMoviesListType;
+  WithMoviesList.propTypes = {};
 
   return WithMoviesList;
 };

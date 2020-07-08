@@ -1,4 +1,5 @@
 import React, {Fragment} from "react";
+import {connect} from "react-redux";
 import {TabsComponentType} from '../../types/index.js';
 import Reviews from "../reviews/reviews.jsx";
 import {Tabs} from '../../const.js';
@@ -6,6 +7,10 @@ import {Tabs} from '../../const.js';
 const TabsComponent = (props) => {
   const {movie: film, listReviews, currentTab, onTabClick} = props;
   const tabs = Object.values(Tabs);
+
+  const getCommentsById = (id, reviews) => {
+    return reviews.filter((review) => review.idFilm === id);
+  };
 
   const getComponentByTab = (tab) => {
     const {genre, year, ratingScore, ratingLevel, ratingCount, movieDescription, movieDirector, movieStarring, runTime} = film;
@@ -71,7 +76,7 @@ const TabsComponent = (props) => {
           </React.Fragment>
         );
       case Tabs.REVIEWS:
-        const reviews = listReviews;
+        const reviews = getCommentsById(film.id, listReviews);
         const halfIndex = Math.ceil(reviews.length / 2);
 
         return (
@@ -118,4 +123,9 @@ const TabsComponent = (props) => {
 
 TabsComponent.propTypes = TabsComponentType;
 
-export default TabsComponent;
+const mapStateToProps = (state) => ({
+  listReviews: state.listReviews,
+});
+
+export {TabsComponent};
+export default connect(mapStateToProps)(TabsComponent);
