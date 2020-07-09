@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import TabsComponent from "./tabs.jsx";
+import {TabsComponent} from "./tabs.jsx";
 import {ListMovies} from "../../mock/testing.js";
 import {Tabs} from '../../const.js';
 

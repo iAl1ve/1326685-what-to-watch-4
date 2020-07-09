@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import {TabsType} from '../../types/index.js';
 import {Tabs} from '../../const.js';
 
 const withTabs = (Component) => {
@@ -31,7 +30,7 @@ const withTabs = (Component) => {
     }
   }
 
-  WithTabs.propTypes = TabsType;
+  WithTabs.propTypes = {};
 
   return WithTabs;
 };

@@ -1,13 +1,17 @@
 import React from "react";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withMoviesList from "../../hocs/with-movies-list/with-movies-list.js";
+import GenresList from "../genres-list/genres-list.jsx";
+import {getSimilarGenreFilms} from "../../utils.js";
+import {MAX_SHOW_MORE_FILMS, GENRE_DEFAULT} from "../../const.js";
 import {AppType} from '../../types/index.js';
 
 const MoviesListWrapped = withMoviesList(MoviesList);
 
 const Main = (props) => {
-  const {movie, listMovies, onTitleButtonClick} = props;
+  const {movie, listMovies, currentGenre, listGenres, onTitleButtonClick, onGenreItemClick} = props;
   const {title, genre, year, src, background} = movie;
+  const similarGenreFilms = getSimilarGenreFilms(listMovies, currentGenre, title).slice(0, MAX_SHOW_MORE_FILMS);
 
   return (
     <React.Fragment>
@@ -70,41 +74,14 @@ const Main = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+          <GenresList
+            currentGenre = {currentGenre}
+            listGenres = {listGenres}
+            onGenreItemClick = {onGenreItemClick}
+          />
 
           <MoviesListWrapped
-            listMovies = {listMovies}
+            listMovies = {currentGenre === GENRE_DEFAULT ? listMovies.slice(0, MAX_SHOW_MORE_FILMS) : similarGenreFilms}
             onTitleButtonClick = {onTitleButtonClick}
           />
 
