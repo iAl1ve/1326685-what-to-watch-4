@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
 import {ListMovies, listGenres} from "../../mock/testing.js";
-import {GENRE_DEFAULT} from "../../const.js";
+import {GENRE_DEFAULT, MAX_SHOW_MORE_FILMS} from "../../const.js";
 
 describe(`Test Render Main`, () => {
   it(`Render Main`, () => {
@@ -11,9 +11,11 @@ describe(`Test Render Main`, () => {
         movie = {ListMovies[0]}
         listMovies = {ListMovies}
         listGenres = {listGenres}
+        currentGenre = {GENRE_DEFAULT}
+        countShowMovies = {MAX_SHOW_MORE_FILMS}
         onTitleButtonClick = {() => {}}
         onGenreItemClick = {() => {}}
-        currentGenre = {GENRE_DEFAULT}
+        onShowMoreClick = {() => {}}
       />, {
         createNodeMock: () => {
           return {};

@@ -8,17 +8,19 @@ import {AppType} from '../../types/index.js';
 
 class App extends PureComponent {
   _renderAppScreen() {
-    const {listMovies, currentGenre, activeFilm, listGenres, onTitleButtonClick, onGenreItemClick} = this.props;
+    const {listMovies, currentGenre, activeFilm, listGenres, countShowMovies, onTitleButtonClick, onGenreItemClick, onShowMoreClick} = this.props;
 
     if (activeFilm === null) {
       return (
         <Main
           movie = {listMovies[0]}
           listMovies = {listMovies}
-          onTitleButtonClick = {onTitleButtonClick}
+          countShowMovies = {countShowMovies}
           currentGenre = {currentGenre}
           listGenres = {listGenres}
           onGenreItemClick = {onGenreItemClick}
+          onShowMoreClick = {onShowMoreClick}
+          onTitleButtonClick = {onTitleButtonClick}
         />
       );
     }
@@ -67,6 +69,7 @@ const mapStateToProps = (state) => ({
   activeFilm: state.activeFilm,
   listMovies: state.listMovies,
   listGenres: state.listGenres,
+  countShowMovies: state.countShowMovies
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -75,7 +78,11 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onGenreItemClick(genre) {
     dispatch(ActionCreator.changeCurrentGenre(genre));
-  }
+    dispatch(ActionCreator.setDefaultCountShowMovies());
+  },
+  onShowMoreClick() {
+    dispatch(ActionCreator.setCountShowMovies());
+  },
 });
 
 export {App};
