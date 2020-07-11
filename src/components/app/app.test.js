@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
 import {ListMovies, listGenres} from "../../mock/testing.js";
-import {GENRE_DEFAULT} from "../../const.js";
+import {GENRE_DEFAULT, MAX_SHOW_MORE_FILMS} from "../../const.js";
 
 const mockStore = configureStore([]);
 
@@ -15,6 +15,7 @@ describe(`Test Render App`, () => {
       activeFilm: null,
       listMovies: ListMovies,
       listGenres,
+      countShowMovies: MAX_SHOW_MORE_FILMS,
     });
 
     const tree = renderer
@@ -23,10 +24,12 @@ describe(`Test Render App`, () => {
             <App
               movie = {ListMovies[0]}
               listMovies = {ListMovies}
+              listGenres = {listGenres}
+              currentGenre = {GENRE_DEFAULT}
+              countShowMovies = {MAX_SHOW_MORE_FILMS}
               onTitleButtonClick = {() => {}}
               onGenreItemClick = {() => {}}
-              currentGenre = {GENRE_DEFAULT}
-              listGenres = {listGenres}
+              onShowMoreClick = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

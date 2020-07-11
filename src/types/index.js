@@ -46,8 +46,10 @@ export const AppType = {
   listMovies: arrayOf(MovieType),
   listGenres: array.isRequired,
   currentGenre: string.isRequired,
+  countShowMovies: number.isRequired,
   onTitleButtonClick: func.isRequired,
   onGenreItemClick: func.isRequired,
+  onShowMoreClick: func.isRequired,
 };
 
 export const MoviePageType = {
@@ -72,4 +74,8 @@ export const GenresType = {
   currentGenre: string.isRequired,
   listGenres: array.isRequired,
   onGenreItemClick: func.isRequired,
+};
+
+export const ShowMoreType = {
+  onShowMoreClick: func.isRequired,
 };

@@ -2,16 +2,18 @@ import React from "react";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withMoviesList from "../../hocs/with-movies-list/with-movies-list.js";
 import GenresList from "../genres-list/genres-list.jsx";
+import ShowMore from "../show-more/show-more.jsx";
 import {getSimilarGenreFilms} from "../../utils.js";
-import {MAX_SHOW_MORE_FILMS, GENRE_DEFAULT} from "../../const.js";
+import {GENRE_DEFAULT} from "../../const.js";
 import {AppType} from '../../types/index.js';
 
 const MoviesListWrapped = withMoviesList(MoviesList);
 
 const Main = (props) => {
-  const {movie, listMovies, currentGenre, listGenres, onTitleButtonClick, onGenreItemClick} = props;
+  const {movie, listMovies, currentGenre, listGenres, countShowMovies, onTitleButtonClick, onGenreItemClick, onShowMoreClick} = props;
   const {title, genre, year, src, background} = movie;
-  const similarGenreFilms = getSimilarGenreFilms(listMovies, currentGenre, title).slice(0, MAX_SHOW_MORE_FILMS);
+  const similarGenreFilms = getSimilarGenreFilms(listMovies, currentGenre, title);
+  const currentListMovies = currentGenre === GENRE_DEFAULT ? listMovies : similarGenreFilms;
 
   return (
     <React.Fragment>
@@ -81,13 +83,17 @@ const Main = (props) => {
           />
 
           <MoviesListWrapped
-            listMovies = {currentGenre === GENRE_DEFAULT ? listMovies.slice(0, MAX_SHOW_MORE_FILMS) : similarGenreFilms}
+            listMovies = {currentListMovies.slice(0, countShowMovies)}
             onTitleButtonClick = {onTitleButtonClick}
           />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {countShowMovies < currentListMovies.length ?
+            <ShowMore
+              onShowMoreClick = {onShowMoreClick}
+            />
+            : ``
+          }
+
         </section>
 
         <footer className="page-footer">
