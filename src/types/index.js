@@ -76,6 +76,12 @@ export const GenresType = {
   onGenreItemClick: func.isRequired,
 };
 
+export const GenresItemType = {
+  genre: string.isRequired,
+  isActive: bool,
+  onGenreItemClick: func.isRequired,
+};
+
 export const ShowMoreType = {
   onShowMoreClick: func.isRequired,
 };
