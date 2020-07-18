@@ -12,6 +12,7 @@ const initialState = {
   listReviews,
   listGenres,
   countShowMovies: MAX_SHOW_MORE_FILMS,
+  isPlaying: false,
 };
 
 const ActionType = {
@@ -19,6 +20,8 @@ const ActionType = {
   SET_ACTIVE_MOVIE: `SET_ACTIVE_MOVIE`,
   SET_СOUNT_SHOW_MOVIES: ` SET_СOUNT_SHOW_MOVIES`,
   SET_DEFAULT_СOUNT_SHOW_MOVIES: ` SET_DEFAULT_СOUNT_SHOW_MOVIES`,
+  PLAY_ACTIVE_MOVIE: `PLAY_ACTIVE_MOVIE`,
+  EXIT_PLAY_MOVIE: `EXIT_PLAY_MOVIE`,
 };
 
 const ActionCreator = {
@@ -37,6 +40,14 @@ const ActionCreator = {
   setDefaultCountShowMovies: () => ({
     type: ActionType.SET_DEFAULT_СOUNT_SHOW_MOVIES,
     payload: MAX_SHOW_MORE_FILMS,
+  }),
+  setPlayActiveMovie: () => ({
+    type: ActionType.PLAY_ACTIVE_MOVIE,
+    payload: true,
+  }),
+  setExitPlayMovie: () => ({
+    type: ActionType.EXIT_PLAY_MOVIE,
+    payload: false,
   }),
 };
 
@@ -57,6 +68,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_DEFAULT_СOUNT_SHOW_MOVIES:
       return extend(state, {
         countShowMovies: action.payload,
+      });
+    case ActionType.PLAY_ACTIVE_MOVIE:
+      return extend(state, {
+        isPlaying: action.payload,
+      });
+    case ActionType.EXIT_PLAY_MOVIE:
+      return extend(state, {
+        isPlaying: action.payload,
       });
   }
 

@@ -4,11 +4,26 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import FullScreenVideoPlayer from "../full-screen-video-player/full-screen-video-player.jsx";
+import withFullScreenVideoPlayer from "../../hocs/with-full-screen-video-player/with-full-screen-video-player.js";
 import {AppType} from '../../types/index.js';
+
+const FullScreenVideoPlayerWrapped = withFullScreenVideoPlayer(FullScreenVideoPlayer);
 
 class App extends PureComponent {
   _renderAppScreen() {
-    const {listMovies, currentGenre, activeFilm, listGenres, countShowMovies, onTitleButtonClick, onGenreItemClick, onShowMoreClick} = this.props;
+    const {listMovies, currentGenre, activeFilm, listGenres, countShowMovies, isPlaying, onTitleButtonClick, onGenreItemClick, onShowMoreClick, onPlayButtonClick, onPlayerExitClick} = this.props;
+
+    if (isPlaying) {
+      let currentFilm = activeFilm ? activeFilm : listMovies[0];
+
+      return (
+        <FullScreenVideoPlayerWrapped
+          movie = {currentFilm}
+          onPlayerExitClick = {onPlayerExitClick}
+        />
+      );
+    }
 
     if (activeFilm === null) {
       return (
@@ -21,6 +36,7 @@ class App extends PureComponent {
           onGenreItemClick = {onGenreItemClick}
           onShowMoreClick = {onShowMoreClick}
           onTitleButtonClick = {onTitleButtonClick}
+          onPlayButtonClick = {onPlayButtonClick}
         />
       );
     }
@@ -32,6 +48,7 @@ class App extends PureComponent {
           listMovies = {listMovies}
           onTitleButtonClick = {onTitleButtonClick}
           currentGenre = {currentGenre}
+          onPlayButtonClick = {onPlayButtonClick}
         />
       );
     }
@@ -40,7 +57,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {currentGenre, listMovies, onTitleButtonClick} = this.props;
+    const {currentGenre, listMovies, onTitleButtonClick, onPlayButtonClick, onPlayerExitClick} = this.props;
 
     return (
       <BrowserRouter>
@@ -54,6 +71,13 @@ class App extends PureComponent {
               listMovies = {listMovies}
               onTitleButtonClick = {onTitleButtonClick}
               currentGenre = {currentGenre}
+              onPlayButtonClick = {onPlayButtonClick}
+            />
+          </Route>
+          <Route exact path="/dev-player">
+            <FullScreenVideoPlayerWrapped
+              movie = {listMovies[0]}
+              onPlayerExitClick = {onPlayerExitClick}
             />
           </Route>
         </Switch>
@@ -69,7 +93,8 @@ const mapStateToProps = (state) => ({
   activeFilm: state.activeFilm,
   listMovies: state.listMovies,
   listGenres: state.listGenres,
-  countShowMovies: state.countShowMovies
+  countShowMovies: state.countShowMovies,
+  isPlaying: state.isPlaying
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -82,6 +107,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onShowMoreClick() {
     dispatch(ActionCreator.setCountShowMovies());
+  },
+  onPlayerExitClick() {
+    dispatch(ActionCreator.setExitPlayMovie());
+  },
+  onPlayButtonClick() {
+    dispatch(ActionCreator.setPlayActiveMovie());
   },
 });
 

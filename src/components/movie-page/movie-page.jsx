@@ -11,7 +11,7 @@ const TabsWrapped = withTabs(TabsComponent);
 const MoviesListWrapped = withMoviesList(MoviesList);
 
 const MoviePage = (props) => {
-  const {movie, listMovies, onTitleButtonClick} = props;
+  const {movie, listMovies, onTitleButtonClick, onPlayButtonClick} = props;
   const {title, genre, year, src, background} = movie;
   const similarGenreFilms = getSimilarGenreFilms(listMovies, genre, title).slice(0, MAX_COUNT_SIMILAR_FILMS);
 
@@ -50,7 +50,11 @@ const MoviePage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button
+                  onClick={() => onPlayButtonClick()}
+                  className="btn btn--play movie-card__button"
+                  type="button"
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

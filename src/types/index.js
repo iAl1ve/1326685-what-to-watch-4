@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const {shape, number, string, arrayOf, array, bool, func, any} = PropTypes;
+const {shape, number, string, arrayOf, array, bool, func, any, node} = PropTypes;
 
 export const MovieType = shape({
   id: number.isRequired,
@@ -84,4 +84,20 @@ export const GenresItemType = {
 
 export const ShowMoreType = {
   onShowMoreClick: func.isRequired,
+};
+
+export const WithFullScreenVideoPlayerType = {
+  movie: MovieType,
+  onPlayerExitClick: func.isRequired,
+};
+
+export const FullScreenVideoType = {
+  title: string.isRequired,
+  isPlaying: bool.isRequired,
+  timeElapsed: any,
+  currentProgress: string.isRequired,
+  onPlayPauseButtonClick: func.isRequired,
+  onFullScreenClick: func.isRequired,
+  onPlayerExitClick: func.isRequired,
+  children: node,
 };
