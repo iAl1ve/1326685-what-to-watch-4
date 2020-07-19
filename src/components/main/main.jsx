@@ -10,7 +10,7 @@ import {AppType} from '../../types/index.js';
 const MoviesListWrapped = withMoviesList(MoviesList);
 
 const Main = (props) => {
-  const {movie, listMovies, currentGenre, listGenres, countShowMovies, onTitleButtonClick, onGenreItemClick, onShowMoreClick} = props;
+  const {movie, listMovies, currentGenre, listGenres, countShowMovies, onTitleButtonClick, onGenreItemClick, onShowMoreClick, onPlayButtonClick} = props;
   const {title, genre, year, src, background} = movie;
   const similarGenreFilms = getSimilarGenreFilms(listMovies, currentGenre, title);
   const currentListMovies = currentGenre === GENRE_DEFAULT ? listMovies : similarGenreFilms;
@@ -54,7 +54,10 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button
+                  onClick={() => onPlayButtonClick()}
+                  className="btn btn--play movie-card__button"
+                  type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

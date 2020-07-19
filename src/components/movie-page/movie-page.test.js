@@ -8,8 +8,6 @@ import {GENRE_DEFAULT} from "../../const.js";
 
 const mockStore = configureStore([]);
 
-const onTitleButtonClick = () => {};
-
 describe(`Test Render MoviePage`, () => {
   it(`Render MoviePage`, () => {
     const store = mockStore({
@@ -22,8 +20,9 @@ describe(`Test Render MoviePage`, () => {
             <MoviePage
               movie = {ListMovies[0]}
               listMovies = {ListMovies}
-              onTitleButtonClick = {onTitleButtonClick}
+              onTitleButtonClick = {() => {}}
               currentGenre = {GENRE_DEFAULT}
+              onPlayButtonClick = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

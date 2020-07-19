@@ -30,6 +30,8 @@ describe(`Test Render App`, () => {
               onTitleButtonClick = {() => {}}
               onGenreItemClick = {() => {}}
               onShowMoreClick = {() => {}}
+              onPlayerExitClick = {() => {}}
+              onPlayButtonClick = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

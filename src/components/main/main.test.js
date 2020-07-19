@@ -16,6 +16,7 @@ describe(`Test Render Main`, () => {
         onTitleButtonClick = {() => {}}
         onGenreItemClick = {() => {}}
         onShowMoreClick = {() => {}}
+        onPlayerExitClick = {() => {}}
       />, {
         createNodeMock: () => {
           return {};
