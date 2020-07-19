@@ -10,10 +10,11 @@ Enzyme.configure({
 });
 
 const MockPlayer = (props) => {
-  const {children, onPlayPauseButtonClick} = props;
+  const {children, onPlayPauseButtonClick, onFullScreenClick} = props;
   return (
     <div>
-      <button onClick={onPlayPauseButtonClick}></button>
+      <button onClick={onPlayPauseButtonClick} className="player__play"></button>
+      <button onClick={onFullScreenClick} className="player__full-screen"></button>
       {children}
     </div>
   );
@@ -25,6 +26,7 @@ MockPlayer.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   onPlayPauseButtonClick: PropTypes.func.isRequired,
+  onFullScreenClick: PropTypes.func.isRequired,
 };
 
 const MockPlayerWrapped = withFullScreenVideoPlayer(MockPlayer);
@@ -66,7 +68,7 @@ describe(`WithFullScreenVideoPlayer HOC e2e tests`, () => {
 
     wrapper.instance().componentDidMount();
 
-    const playButton = wrapper.find(`button`);
+    const playButton = wrapper.find(`button.player__play`);
     playButton.simulate(`click`);
 
     expect(wrapper.state().isPlaying).toBeFalsy();
@@ -90,7 +92,7 @@ describe(`WithFullScreenVideoPlayer HOC e2e tests`, () => {
     expect(spy).toHaveBeenCalledTimes(1);
     expect(wrapper.state().isPlaying).toBeTruthy();
 
-    const playButton = wrapper.find(`button`);
+    const playButton = wrapper.find(`button.player__play`);
     playButton.simulate(`click`);
 
     expect(spy).toHaveBeenCalledTimes(1);
@@ -99,5 +101,25 @@ describe(`WithFullScreenVideoPlayer HOC e2e tests`, () => {
     playButton.simulate(`click`);
     expect(spy).toHaveBeenCalledTimes(2);
     expect(wrapper.state().isPlaying).toBeTruthy();
+  });
+
+  it(`Should call video full screen on the FullScreenVideoPlayerButton click`, () => {
+    const wrapper = mount(
+        <MockPlayerWrapped
+          movie = {ListMovies[0]}
+          onPlayerExitClick = {() => {}}
+        />
+    );
+
+    const {_videoRef} = wrapper.instance();
+
+    wrapper.instance().componentDidMount();
+
+    _videoRef.current.requestFullscreen = jest.fn();
+
+    const fullScreenVideoPlayerButton = wrapper.find(`button.player__full-screen`);
+
+    fullScreenVideoPlayerButton.simulate(`click`);
+    expect(_videoRef.current.requestFullscreen.mock.calls.length).toBe(1);
   });
 });
