@@ -1,14 +1,11 @@
-import {reducer, ActionType} from "./reducer.js";
-import {ListMovies, ListReviews, listGenres} from "./mock/testing.js";
-import {GENRE_DEFAULT, MAX_SHOW_MORE_FILMS} from "./const.js";
+import {reducer, ActionType} from "./app-state.js";
+import {GENRE_DEFAULT, MAX_SHOW_MORE_FILMS} from "../../const.js";
+import {ListMovies} from "../../mock/testing.js";
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: false,
   });
@@ -18,9 +15,6 @@ it(`Reducer should change the genre to a given value`, () => {
   expect(reducer({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: false,
   }, {
@@ -29,9 +23,6 @@ it(`Reducer should change the genre to a given value`, () => {
   })).toEqual({
     currentGenre: `Drama`,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: false,
   });
@@ -41,9 +32,6 @@ it(`Reducer should change the movie to a given value`, () => {
   expect(reducer({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: false,
   }, {
@@ -52,9 +40,6 @@ it(`Reducer should change the movie to a given value`, () => {
   })).toEqual({
     currentGenre: GENRE_DEFAULT,
     activeFilm: ListMovies[0],
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: false,
   });
@@ -65,9 +50,6 @@ it(`Reducer should change the count show movie to a given value x2`, () => {
   expect(reducer({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: false,
   }, {
@@ -76,9 +58,6 @@ it(`Reducer should change the count show movie to a given value x2`, () => {
   })).toEqual({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: count,
     isPlaying: false,
   });
@@ -89,9 +68,6 @@ it(`Reducer should set default value the count show movies`, () => {
   expect(reducer({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: count,
     isPlaying: false,
   }, {
@@ -100,9 +76,6 @@ it(`Reducer should set default value the count show movies`, () => {
   })).toEqual({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: false,
   });
@@ -112,9 +85,6 @@ it(`Reducer should play the movie`, () => {
   expect(reducer({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: false,
   }, {
@@ -123,9 +93,6 @@ it(`Reducer should play the movie`, () => {
   })).toEqual({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: true,
   });
@@ -135,9 +102,6 @@ it(`Reducer should stop play the movie`, () => {
   expect(reducer({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: true,
   }, {
@@ -146,9 +110,6 @@ it(`Reducer should stop play the movie`, () => {
   })).toEqual({
     currentGenre: GENRE_DEFAULT,
     activeFilm: null,
-    listMovies: ListMovies,
-    listReviews: ListReviews,
-    listGenres,
     countShowMovies: MAX_SHOW_MORE_FILMS,
     isPlaying: false,
   });

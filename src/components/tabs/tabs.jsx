@@ -1,19 +1,25 @@
 import React, {Fragment} from "react";
 import {connect} from "react-redux";
-import {TabsComponentType} from '../../types/index.js';
 import Reviews from "../reviews/reviews.jsx";
+import {formatTime, getRatingLevel} from '../../utils.js';
 import {Tabs} from '../../const.js';
+import {getReviews} from "../../reducer/data/selectors.js";
+import {TabsComponentType} from '../../types/index.js';
 
 const TabsComponent = (props) => {
   const {movie: film, listReviews, currentTab, onTabClick} = props;
   const tabs = Object.values(Tabs);
 
-  const getCommentsById = (id, reviews) => {
-    return reviews.filter((review) => review.idFilm === id);
+  // Пока сделал чтобы возвращало все моковые коммментарии
+  // const getCommentsById = (id, reviews) => {
+  const getCommentsById = () => {
+    // return reviews.filter((review) => review.idFilm === id);
+    return listReviews;
   };
 
   const getComponentByTab = (tab) => {
-    const {genre, year, ratingScore, ratingLevel, ratingCount, movieDescription, movieDirector, movieStarring, runTime} = film;
+    const {genre, year, ratingScore, ratingCount, movieDescription, movieDirector, movieStarring, runTime} = film;
+    const starring = movieStarring.join(`, `);
 
     switch (tab) {
       case Tabs.OVERVIEW:
@@ -22,7 +28,7 @@ const TabsComponent = (props) => {
             <div className="movie-rating">
               <div className="movie-rating__score">{ratingScore}</div>
               <p className="movie-rating__meta">
-                <span className="movie-rating__level">{ratingLevel}</span>
+                <span className="movie-rating__level">{getRatingLevel(ratingScore)}</span>
                 <span className="movie-rating__count">{ratingCount} ratings</span>
               </p>
             </div>
@@ -32,7 +38,10 @@ const TabsComponent = (props) => {
 
               <p className="movie-card__director"><strong>Director: {movieDirector}</strong></p>
 
-              <p className="movie-card__starring"><strong>Starring: {movieStarring}</strong></p>
+              <p className="movie-card__starring">
+                <strong>Starring: {starring}
+                </strong>
+              </p>
             </div>
           </React.Fragment>
         );
@@ -48,7 +57,7 @@ const TabsComponent = (props) => {
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Starring</strong>
                   <span className="movie-card__details-value">
-                    {movieStarring.split(`,`).map((actor) => {
+                    {movieStarring.map((actor) => {
                       return (
                         <Fragment key={actor}>
                           {actor} <br/>
@@ -61,7 +70,7 @@ const TabsComponent = (props) => {
               <div className="movie-card__text-col">
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Run Time</strong>
-                  <span className="movie-card__details-value">{runTime}</span>
+                  <span className="movie-card__details-value">{formatTime(runTime)}</span>
                 </p>
                 <p className="movie-card__details-item">
                   <strong className="movie-card__details-name">Genre</strong>
@@ -124,7 +133,7 @@ const TabsComponent = (props) => {
 TabsComponent.propTypes = TabsComponentType;
 
 const mapStateToProps = (state) => ({
-  listReviews: state.listReviews,
+  listReviews: getReviews(state),
 });
 
 export {TabsComponent};

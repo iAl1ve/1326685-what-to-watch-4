@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
 import MoviePage from "./movie-page.jsx";
 import {ListMovies, ListReviews} from "../../mock/testing.js";
 import {GENRE_DEFAULT} from "../../const.js";
@@ -11,7 +12,9 @@ const mockStore = configureStore([]);
 describe(`Test Render MoviePage`, () => {
   it(`Render MoviePage`, () => {
     const store = mockStore({
-      listReviews: ListReviews,
+      [NameSpace.DATA]: {
+        listReviews: ListReviews,
+      },
     });
 
     const tree = renderer

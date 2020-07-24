@@ -1,16 +1,9 @@
-import {extend} from "./utils.js";
-import {GENRE_DEFAULT, MAX_COUNT_GENRES, MAX_SHOW_MORE_FILMS} from "./const.js";
-import listMovies from "./mock/films.js";
-import listReviews from "./mock/reviews.js";
-
-const listGenres = [GENRE_DEFAULT, ...new Set(listMovies.map((film) => film.genre).slice(0, MAX_COUNT_GENRES))];
+import {extend} from "../../utils.js";
+import {GENRE_DEFAULT, MAX_SHOW_MORE_FILMS} from "../../const.js";
 
 const initialState = {
   currentGenre: GENRE_DEFAULT,
   activeFilm: null,
-  listMovies,
-  listReviews,
-  listGenres,
   countShowMovies: MAX_SHOW_MORE_FILMS,
   isPlaying: false,
 };
