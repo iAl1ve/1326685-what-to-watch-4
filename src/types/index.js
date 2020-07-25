@@ -9,19 +9,22 @@ export const MovieType = shape({
   year: number.isRequired,
   src: string.isRequired,
   background: string.isRequired,
-  ratingScore: string.isRequired,
-  ratingLevel: string.isRequired,
+  ratingScore: number.isRequired,
   ratingCount: number.isRequired,
   movieDescription: string.isRequired,
   movieDirector: string.isRequired,
-  movieStarring: string.isRequired,
+  movieStarring: array.isRequired,
   preview: string.isRequired,
-  runTime: string.isRequired,
+  runTime: number.isRequired,
+  videoLink: string.isRequired,
+  isFavorite: bool.isRequired,
+  backgroundColor: string.isRequired,
+  previewImage: string.isRequired,
 });
 
 export const ReviewType = shape({
   id: number.isRequired,
-  idFilm: number.isRequired,
+  idUser: number.isRequired,
   text: string.isRequired,
   author: string.isRequired,
   date: string.isRequired,
@@ -44,7 +47,7 @@ export const ListMoviesType = {
 export const AppType = {
   movie: MovieType,
   listMovies: arrayOf(MovieType),
-  listGenres: array.isRequired,
+  listGenres: array,
   currentGenre: string.isRequired,
   countShowMovies: number.isRequired,
   onTitleButtonClick: func.isRequired,
@@ -64,21 +67,21 @@ export const VideoType = {
 };
 
 export const TabsComponentType = {
-  movie: MovieType.isRequired,
+  movie: MovieType,
   listReviews: arrayOf(ReviewType),
   currentTab: string.isRequired,
   onTabClick: func.isRequired,
 };
 
 export const GenresType = {
-  currentGenre: string.isRequired,
-  listGenres: array.isRequired,
+  currentGenre: string,
+  listGenres: array,
   onGenreItemClick: func.isRequired,
 };
 
 export const GenresItemType = {
   genre: string.isRequired,
-  isActive: bool,
+  isActive: bool.isRequired,
   onGenreItemClick: func.isRequired,
 };
 
@@ -93,9 +96,9 @@ export const WithFullScreenVideoPlayerType = {
 
 export const FullScreenVideoType = {
   title: string.isRequired,
-  isPlaying: bool.isRequired,
+  isPlaying: bool,
   timeElapsed: any,
-  currentProgress: string.isRequired,
+  currentProgress: string,
   onPlayPauseButtonClick: func.isRequired,
   onFullScreenClick: func.isRequired,
   onPlayerExitClick: func.isRequired,

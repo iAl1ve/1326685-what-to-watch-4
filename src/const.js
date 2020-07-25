@@ -28,3 +28,11 @@ export const MONTH_NAMES = [
   `November`,
   `December`,
 ];
+
+export const Rating = {
+  BAD: `Bad`,
+  NORMAL: `Normal`,
+  GOOD: `Good`,
+  VERY_GOOD: `Very good`,
+  AWESOME: `Awesome`,
+};

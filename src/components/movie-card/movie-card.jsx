@@ -4,7 +4,7 @@ import VideoPlayer from '../video-player/video-player.jsx';
 
 const MovieCard = (props) => {
   const {movie, isPlaying, onTitleButtonClick, onMovieCardHover, onMouseCardLeave} = props;
-  const {title, src, preview} = movie;
+  const {title, src, previewImage, preview} = movie;
 
   return (
     <React.Fragment>
@@ -15,7 +15,7 @@ const MovieCard = (props) => {
           onMouseLeave={() => onMouseCardLeave()} >
           {isPlaying ? (
             <VideoPlayer
-              src = {src}
+              src = {previewImage}
               preview = {preview}
             />
           ) : (

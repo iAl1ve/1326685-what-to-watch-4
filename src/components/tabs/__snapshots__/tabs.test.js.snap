@@ -81,7 +81,7 @@ exports[`Test Render Tabs Component Render Tabs 1`] = `
     >
       <strong>
         Director: 
-        Director: Wes Andreson
+        Wes Andreson
       </strong>
     </p>
     <p
@@ -89,7 +89,7 @@ exports[`Test Render Tabs Component Render Tabs 1`] = `
     >
       <strong>
         Starring: 
-        Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
+        Bill Murray, Edward Norton, Jude Law, Willem Dafoe
       </strong>
     </p>
   </div>
