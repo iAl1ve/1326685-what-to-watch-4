@@ -16,11 +16,6 @@ const LoaderScreen = () => {
             </a>
           </div>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
         </header>
 
         <h3 style={{textAlign: `center`, marginTop: `180px`, marginBottom: `160px`}}>Wait please. Loading data....</h3>

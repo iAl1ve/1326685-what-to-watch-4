@@ -1,4 +1,4 @@
-import {extend} from "../../utils.js";
+import {extend, errorPopup} from "../../utils.js";
 import {getAdaptedFilms, getAdaptedFilm} from "../../adapter/adapter.js";
 import ListReviews from "../../mock/reviews.js";
 import {GENRE_DEFAULT, MAX_COUNT_GENRES} from "../../const.js";
@@ -8,7 +8,6 @@ const initialState = {
   promoFilm: null,
   listGenres: null,
   listReviews: null,
-  isErrorLoading: false,
 };
 
 const ActionType = {
@@ -16,7 +15,6 @@ const ActionType = {
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   LOAD_GENRES: `LOAD_GENRES`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
-  SET_ERROR: `SET_ERROR`,
 };
 
 const ActionCreator = {
@@ -47,13 +45,6 @@ const ActionCreator = {
       payload: reviews,
     };
   },
-
-  setError: (error) => {
-    return {
-      type: ActionType.SET_ERROR,
-      payload: error,
-    };
-  },
 };
 
 const Operation = {
@@ -66,9 +57,8 @@ const Operation = {
         dispatch(ActionCreator.loadGenres(
             [GENRE_DEFAULT, ...allGenres.slice(0, MAX_COUNT_GENRES)])
         );
-      }).catch((err) => {
-        dispatch(ActionCreator.setError(true));
-        return err;
+      }).catch(({response}) => {
+        return errorPopup(response);
       });
   },
 
@@ -76,9 +66,8 @@ const Operation = {
     return api.get(`/films/promo`)
       .then(({data}) => {
         dispatch(ActionCreator.loadPromoFilm(getAdaptedFilm(data)));
-      }).catch((err) => {
-        dispatch(ActionCreator.setError(true));
-        return err;
+      }).catch(({response}) => {
+        return errorPopup(response);
       });
   },
   // Пока сделал чтобы подгружало моковые коммментарии
@@ -104,10 +93,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         listReviews: action.payload,
-      });
-    case ActionType.SET_ERROR:
-      return extend(state, {
-        isErrorLoading: action.payload,
       });
   }
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const {shape, number, string, arrayOf, array, bool, func, any, node} = PropTypes;
+const {shape, number, string, arrayOf, array, bool, func, any, node, oneOfType} = PropTypes;
 
 export const MovieType = shape({
   id: number.isRequired,
@@ -50,9 +50,11 @@ export const AppType = {
   listGenres: array,
   currentGenre: string.isRequired,
   countShowMovies: number.isRequired,
+  isAuthorization: bool,
   onTitleButtonClick: func.isRequired,
   onGenreItemClick: func.isRequired,
   onShowMoreClick: func.isRequired,
+  login: func,
 };
 
 export const MoviePageType = {
@@ -103,4 +105,26 @@ export const FullScreenVideoType = {
   onFullScreenClick: func.isRequired,
   onPlayerExitClick: func.isRequired,
   children: node,
+};
+
+export const SignInType = {
+  onSubmit: func.isRequired,
+};
+
+export const headerType = {
+  userInfo: oneOfType([
+    () => null,
+    shape({
+      id: number.isRequired,
+      email: string.isRequired,
+      name: string.isRequired,
+      avatarUrl: string,
+    }).isRequired,
+  ]),
+  isMain: bool.isRequired,
+  isAuthorization: bool.isRequired,
+};
+
+export const footerType = {
+  isMain: bool.isRequired,
 };

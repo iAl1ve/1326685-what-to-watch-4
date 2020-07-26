@@ -1,4 +1,5 @@
 import {MONTH_NAMES, Rating} from "./const.js";
+import Swal from "sweetalert2";
 
 export const formatDate = (date) => {
   date = new Date(date);
@@ -42,4 +43,12 @@ export const getRatingLevel = (rating) => {
       break;
   }
   return ratingLevel;
+};
+
+export const errorPopup = (response) => {
+  return Swal.fire({
+    icon: `error`,
+    title: `Request failed: ${response.status}`,
+    text: response.data.error
+  });
 };

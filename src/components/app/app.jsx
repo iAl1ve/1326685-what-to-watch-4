@@ -6,59 +6,70 @@ import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import FullScreenVideoPlayer from "../full-screen-video-player/full-screen-video-player.jsx";
 import withFullScreenVideoPlayer from "../../hocs/with-full-screen-video-player/with-full-screen-video-player.js";
-import {getGenres, getPromoFilm, getFilms, getErrorState} from "../../reducer/data/selectors.js";
+import {getGenres, getPromoFilm, getFilms} from "../../reducer/data/selectors.js";
 import {getCurrentGenre, getActiveFilm, getIsPlaying, getСountShowMovies} from "../../reducer/app-state/selectors.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
 import LoaderScreen from "../loader-screen/loader-screen.jsx";
-import ErrorScreen from "../error-screen/error-screen.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 import {AppType} from '../../types/index.js';
 
 const FullScreenVideoPlayerWrapped = withFullScreenVideoPlayer(FullScreenVideoPlayer);
 
 class App extends PureComponent {
   _renderAppScreen() {
-    const {listMovies, currentGenre, activeFilm, promoFilm, listGenres, countShowMovies, isPlaying, onTitleButtonClick, onGenreItemClick, onShowMoreClick, onPlayButtonClick, onPlayerExitClick} = this.props;
+    const {
+      listMovies,
+      currentGenre,
+      activeFilm,
+      promoFilm,
+      listGenres,
+      countShowMovies,
+      isPlaying,
+      onTitleButtonClick,
+      onGenreItemClick,
+      onShowMoreClick,
+      onPlayButtonClick,
+      onPlayerExitClick,
+    } = this.props;
 
-    if (listMovies === null || promoFilm === null || listGenres === null) {
-      return this._renderLoader();
-    }
+    switch (true) {
+      case listMovies === null || promoFilm === null || listGenres === null:
+        return this._renderLoader();
+      case isPlaying:
+        let currentFilm = activeFilm ? activeFilm : listMovies[0];
 
-    if (isPlaying) {
-      let currentFilm = activeFilm ? activeFilm : listMovies[0];
+        return (
+          <FullScreenVideoPlayerWrapped
+            movie = {currentFilm}
+            onPlayerExitClick = {onPlayerExitClick}
+          />
+        );
+      case activeFilm === null:
 
-      return (
-        <FullScreenVideoPlayerWrapped
-          movie = {currentFilm}
-          onPlayerExitClick = {onPlayerExitClick}
-        />
-      );
-    }
-
-    if (activeFilm === null) {
-      return (
-        <Main
-          movie = {promoFilm}
-          listMovies = {listMovies}
-          countShowMovies = {countShowMovies}
-          currentGenre = {currentGenre}
-          listGenres = {listGenres}
-          onGenreItemClick = {onGenreItemClick}
-          onShowMoreClick = {onShowMoreClick}
-          onTitleButtonClick = {onTitleButtonClick}
-          onPlayButtonClick = {onPlayButtonClick}
-        />
-      );
-    }
-
-    if (activeFilm) {
-      return (
-        <MoviePage
-          movie = {activeFilm}
-          listMovies = {listMovies}
-          onTitleButtonClick = {onTitleButtonClick}
-          currentGenre = {currentGenre}
-          onPlayButtonClick = {onPlayButtonClick}
-        />
-      );
+        return (
+          <Main
+            movie = {promoFilm}
+            listMovies = {listMovies}
+            countShowMovies = {countShowMovies}
+            currentGenre = {currentGenre}
+            listGenres = {listGenres}
+            onGenreItemClick = {onGenreItemClick}
+            onShowMoreClick = {onShowMoreClick}
+            onTitleButtonClick = {onTitleButtonClick}
+            onPlayButtonClick = {onPlayButtonClick}
+          />
+        );
+      case !!activeFilm:
+        return (
+          <MoviePage
+            movie = {activeFilm}
+            listMovies = {listMovies}
+            onTitleButtonClick = {onTitleButtonClick}
+            currentGenre = {currentGenre}
+            onPlayButtonClick = {onPlayButtonClick}
+          />
+        );
     }
 
     return null;
@@ -71,13 +82,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {currentGenre, listMovies, onTitleButtonClick, onPlayButtonClick, onPlayerExitClick, isErrorLoading} = this.props;
-
-    if (isErrorLoading) {
-      return (
-        <ErrorScreen />
-      );
-    }
+    const {currentGenre, listMovies, isAuthorization, onTitleButtonClick, onPlayButtonClick, onPlayerExitClick, login} = this.props;
 
     if (listMovies === null) {
       return this._renderLoader();
@@ -104,6 +109,12 @@ class App extends PureComponent {
               onPlayerExitClick = {onPlayerExitClick}
             />
           </Route>
+          <Route exact path="/sign">
+            {isAuthorization ? this._renderAppScreen() :
+              <SignIn
+                onSubmit = {login}
+              /> }
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -120,7 +131,7 @@ const mapStateToProps = (state) => ({
   listGenres: getGenres(state),
   countShowMovies: getСountShowMovies(state),
   isPlaying: getIsPlaying(state),
-  isErrorLoading: getErrorState(state),
+  isAuthorization: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -139,6 +150,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onPlayButtonClick() {
     dispatch(ActionCreator.setPlayActiveMovie());
+  },
+  login(authData) {
+    dispatch(UserOperation.login(authData));
   },
 });
 

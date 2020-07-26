@@ -13,7 +13,6 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: null,
       listReviews: null,
-      isErrorLoading: false,
     });
   });
 
@@ -23,7 +22,6 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: null,
       listReviews: null,
-      isErrorLoading: false,
     }, {
       type: ActionType.LOAD_FILMS,
       payload: ListMovies,
@@ -32,7 +30,6 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: null,
       listReviews: null,
-      isErrorLoading: false,
     });
   });
 
@@ -42,7 +39,6 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: null,
       listReviews: null,
-      isErrorLoading: false,
     }, {
       type: ActionType.LOAD_PROMO_FILM,
       payload: ListMovies[0],
@@ -51,7 +47,6 @@ describe(`Testing work Reducer`, () => {
       promoFilm: ListMovies[0],
       listGenres: null,
       listReviews: null,
-      isErrorLoading: false,
     });
   });
 
@@ -61,7 +56,6 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: null,
       listReviews: null,
-      isErrorLoading: false,
     }, {
       type: ActionType.LOAD_GENRES,
       payload: ListGenres,
@@ -70,7 +64,6 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: ListGenres,
       listReviews: null,
-      isErrorLoading: false,
     });
   });
 
@@ -80,7 +73,6 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: null,
       listReviews: null,
-      isErrorLoading: false,
     }, {
       type: ActionType.LOAD_REVIEWS,
       payload: ListReviews,
@@ -89,26 +81,6 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: null,
       listReviews: ListReviews,
-      isErrorLoading: false,
-    });
-  });
-
-  it(`Reducer should update isErrorLoading`, () => {
-    expect(reducer({
-      listMovies: null,
-      promoFilm: null,
-      listGenres: null,
-      listReviews: null,
-      isErrorLoading: false,
-    }, {
-      type: ActionType.SET_ERROR,
-      payload: true,
-    })).toEqual({
-      listMovies: null,
-      promoFilm: null,
-      listGenres: null,
-      listReviews: null,
-      isErrorLoading: true,
     });
   });
 });

@@ -1,3 +1,5 @@
+import {BASE_URL} from "../const.js";
+
 export const getAdaptedFilm = (film) => {
   return {
     id: film.id,
@@ -30,5 +32,14 @@ export const getAdaptComment = (comment) => {
     rating: comment.rating,
     author: comment.user.name,
     idUser: comment.user.id,
+  };
+};
+
+export const getAdaptedAuthInfo = (authInfo) => {
+  return {
+    id: authInfo.id,
+    email: authInfo.email,
+    name: authInfo.name,
+    avatarUrl: BASE_URL + authInfo.avatar_url,
   };
 };

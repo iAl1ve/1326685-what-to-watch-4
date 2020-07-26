@@ -15,7 +15,3 @@ export const getGenres = (state) => {
 export const getReviews = (state) => {
   return state[NameSpace.DATA].listReviews;
 };
-
-export const getErrorState = (state) => {
-  return state[NameSpace.DATA].isErrorLoading;
-};

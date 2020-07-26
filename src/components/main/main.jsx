@@ -3,6 +3,8 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import withMoviesList from "../../hocs/with-movies-list/with-movies-list.js";
 import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
+import Header from "../header/header.jsx";
+import Footer from "../footer/footer.jsx";
 import {getSimilarGenreFilms} from "../../utils.js";
 import {GENRE_DEFAULT} from "../../const.js";
 import {AppType} from '../../types/index.js';
@@ -24,21 +26,9 @@ const Main = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
-        </header>
+        <Header
+          isMain = {true}
+        />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -103,19 +93,9 @@ const Main = (props) => {
 
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer
+          isMain = {true}
+        />
       </div>
     </React.Fragment>
   );

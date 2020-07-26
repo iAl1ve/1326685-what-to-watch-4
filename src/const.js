@@ -6,7 +6,18 @@ export const MAX_SHOW_MORE_FILMS = 8;
 export const MAX_COUNT_SIMILAR_FILMS = 4;
 export const MAX_COUNT_GENRES = 9;
 
+export const BASE_URL = `https://4.react.pages.academy`;
 export const GENRE_DEFAULT = `All genres`;
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
+export const ErrorStatus = {
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400
+};
 
 export const Tabs = {
   OVERVIEW: `Overview`,
