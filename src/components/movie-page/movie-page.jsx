@@ -13,7 +13,7 @@ const TabsWrapped = withTabs(TabsComponent);
 const MoviesListWrapped = withMoviesList(MoviesList);
 
 const MoviePage = (props) => {
-  const {movie, listMovies, onTitleButtonClick, onPlayButtonClick} = props;
+  const {movie, listMovies, isAuthorization, onTitleButtonClick, onPlayButtonClick} = props;
   const {title, genre, year, src, background} = movie;
   const similarGenreFilms = getSimilarGenreFilms(listMovies, genre, title).slice(0, MAX_COUNT_SIMILAR_FILMS);
 
@@ -56,7 +56,10 @@ const MoviePage = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                {isAuthorization
+                  ? (<a href="add-review.html" className="btn movie-card__button">Add review</a>)
+                  : null
+                }
               </div>
             </div>
           </div>
@@ -84,7 +87,10 @@ const MoviePage = (props) => {
             listMovies = {similarGenreFilms}
             onTitleButtonClick = {onTitleButtonClick}
           />
-
+          {similarGenreFilms.length === 0
+            ? `No related movies found By genre`
+            : null
+          }
         </section>
 
         <Footer

@@ -26,6 +26,9 @@ describe(`Test Render MoviePage`, () => {
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userInfo: {},
+        isStatusSend: false,
+        isFormDisabled: false,
       }
     });
 
@@ -37,6 +40,7 @@ describe(`Test Render MoviePage`, () => {
               listMovies = {ListMovies}
               onTitleButtonClick = {() => {}}
               currentGenre = {GENRE_DEFAULT}
+              isAuthorization = {false}
               onPlayButtonClick = {() => {}}
             />
           </Provider>, {

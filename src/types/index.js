@@ -28,7 +28,7 @@ export const ReviewType = shape({
   text: string.isRequired,
   author: string.isRequired,
   date: string.isRequired,
-  rating: string.isRequired,
+  rating: number.isRequired,
 });
 
 export const ReviewsType = {
@@ -60,6 +60,7 @@ export const AppType = {
 export const MoviePageType = {
   movie: MovieType,
   listMovies: arrayOf(MovieType),
+  isAuthorization: bool,
   onTitleButtonClick: func.isRequired,
 };
 
@@ -127,4 +128,10 @@ export const headerType = {
 
 export const footerType = {
   isMain: bool.isRequired,
+};
+
+export const addReviewType = {
+  movie: MovieType,
+  onSubmitReview: func.isRequired,
+  isFormDisabled: bool.isRequired,
 };

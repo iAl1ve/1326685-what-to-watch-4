@@ -13,74 +13,74 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: null,
       listReviews: null,
+      isStatusSend: false,
+      isFormDisabled: false,
     });
   });
 
   it(`Reducer should update films by load films`, () => {
     expect(reducer({
       listMovies: null,
-      promoFilm: null,
-      listGenres: null,
-      listReviews: null,
     }, {
       type: ActionType.LOAD_FILMS,
       payload: ListMovies,
     })).toEqual({
       listMovies: ListMovies,
-      promoFilm: null,
-      listGenres: null,
-      listReviews: null,
     });
   });
 
   it(`Reducer should update promoFilm by load promoFilm`, () => {
     expect(reducer({
-      listMovies: null,
       promoFilm: null,
-      listGenres: null,
-      listReviews: null,
     }, {
       type: ActionType.LOAD_PROMO_FILM,
       payload: ListMovies[0],
     })).toEqual({
-      listMovies: null,
       promoFilm: ListMovies[0],
-      listGenres: null,
-      listReviews: null,
     });
   });
 
   it(`Reducer should update promoFilm by load genres`, () => {
     expect(reducer({
-      listMovies: null,
-      promoFilm: null,
       listGenres: null,
-      listReviews: null,
     }, {
       type: ActionType.LOAD_GENRES,
       payload: ListGenres,
     })).toEqual({
-      listMovies: null,
-      promoFilm: null,
       listGenres: ListGenres,
-      listReviews: null,
     });
   });
 
   it(`Reducer should update listReviews by load reviews`, () => {
     expect(reducer({
-      listMovies: null,
-      promoFilm: null,
-      listGenres: null,
       listReviews: null,
     }, {
       type: ActionType.LOAD_REVIEWS,
       payload: ListReviews,
     })).toEqual({
-      listMovies: null,
-      promoFilm: null,
-      listGenres: null,
       listReviews: ListReviews,
+    });
+  });
+
+  it(`Reducer should change isStatusSend by a given value`, () => {
+    expect(reducer({
+      isStatusSend: false,
+    }, {
+      type: ActionType.SUBMIT_REVIEW,
+      payload: true,
+    })).toEqual({
+      isStatusSend: true
+    });
+  });
+
+  it(`Reducer should change isFormDisabled by a given value`, () => {
+    expect(reducer({
+      isFormDisabled: false,
+    }, {
+      type: ActionType.SET_FORM_BLOCKED,
+      payload: true,
+    })).toEqual({
+      isFormDisabled: true
     });
   });
 });
@@ -127,4 +127,41 @@ describe(`Operation work data load correctly`, () => {
         });
       });
   });
+
+  /* it(`Should make a correct API call to /comments/id`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const loadReviewsLoader = Operation.loadReviews(42);
+
+    apiMock
+      .onGet(`/comments/42`)
+      .reply(200, {fake: true});
+
+    return loadReviewsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_REVIEWS,
+          payload: getAdaptedComments({fake: true}),
+        });
+      });
+  });
+
+  it(`Should make a correct API call review to /comments`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const submitReview = Operation.submitReview({fake: true});
+
+    apiMock
+      .onPost(`/comments/42`)
+      .reply(200, {fake: true});
+    return submitReview(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SUBMIT_REVIEW,
+          payload: {fake: true},
+        });
+      });
+  }); */
 });

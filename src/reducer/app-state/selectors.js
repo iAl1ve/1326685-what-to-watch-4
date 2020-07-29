@@ -1,17 +1,19 @@
 import NameSpace from "../name-space.js";
 
+const NAME_SPACE = NameSpace.APP_STATE;
+
 export const getCurrentGenre = (state) => {
-  return state[NameSpace.APP_STATE].currentGenre;
+  return state[NAME_SPACE].currentGenre;
 };
 
 export const getActiveFilm = (state) => {
-  return state[NameSpace.APP_STATE].activeFilm;
+  return state[NAME_SPACE].activeFilm;
 };
 
 export const getIsPlaying = (state) => {
-  return state[NameSpace.APP_STATE].isPlaying;
+  return state[NAME_SPACE].isPlaying;
 };
 
 export const getСountShowMovies = (state) => {
-  return state[NameSpace.APP_STATE].countShowMovies;
+  return state[NAME_SPACE].countShowMovies;
 };

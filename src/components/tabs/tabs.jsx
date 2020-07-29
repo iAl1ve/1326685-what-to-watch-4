@@ -10,13 +10,6 @@ const TabsComponent = (props) => {
   const {movie: film, listReviews, currentTab, onTabClick} = props;
   const tabs = Object.values(Tabs);
 
-  // Пока сделал чтобы возвращало все моковые коммментарии
-  // const getCommentsById = (id, reviews) => {
-  const getCommentsById = () => {
-    // return reviews.filter((review) => review.idFilm === id);
-    return listReviews;
-  };
-
   const getComponentByTab = (tab) => {
     const {genre, year, ratingScore, ratingCount, movieDescription, movieDirector, movieStarring, runTime} = film;
     const starring = movieStarring.join(`, `);
@@ -85,7 +78,7 @@ const TabsComponent = (props) => {
           </React.Fragment>
         );
       case Tabs.REVIEWS:
-        const reviews = getCommentsById(film.id, listReviews);
+        const reviews = listReviews;
         const halfIndex = Math.ceil(reviews.length / 2);
 
         return (

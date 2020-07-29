@@ -49,6 +49,15 @@ export const errorPopup = (response) => {
   return Swal.fire({
     icon: `error`,
     title: `Request failed: ${response.status}`,
-    text: response.data.error
+    text: `An error has occurred`
   });
 };
+
+export const successPopup = () => {
+  return Swal.fire({
+    icon: `success`,
+    title: `Good job!`,
+    text: `Your comment has been sent successfully`
+  });
+};
+

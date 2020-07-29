@@ -29,7 +29,6 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-
     case ActionType.REQUIRED_AUTHORIZATION:
       return extend(state, {
         authorizationStatus: action.payload,
@@ -70,6 +69,7 @@ const Operation = {
         return errorPopup(response);
       });
   },
+
 };
 
 export {reducer, ActionType, ActionCreator, Operation};

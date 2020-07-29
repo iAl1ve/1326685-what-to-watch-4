@@ -5,6 +5,10 @@ export const PLAYBACK_DELAY = 1000;
 export const MAX_SHOW_MORE_FILMS = 8;
 export const MAX_COUNT_SIMILAR_FILMS = 4;
 export const MAX_COUNT_GENRES = 9;
+export const MIN_LENGTH_TEXT_REVIEW = 50;
+export const MAX_LENGTH_TEXT_REVIEW = 400;
+export const DEFAULT_CHECKED_STAR = 3;
+export const COUNT_STARS = 5;
 
 export const BASE_URL = `https://4.react.pages.academy`;
 export const GENRE_DEFAULT = `All genres`;

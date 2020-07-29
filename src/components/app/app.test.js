@@ -27,6 +27,9 @@ describe(`Test Render App`, () => {
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userInfo: {},
+        isStatusSend: false,
+        isFormDisabled: false,
       }
     });
 
@@ -42,12 +45,14 @@ describe(`Test Render App`, () => {
               currentGenre = {GENRE_DEFAULT}
               countShowMovies = {MAX_SHOW_MORE_FILMS}
               isAuthorization = {false}
+              isFormDisabled = {false}
               onTitleButtonClick = {() => {}}
               onGenreItemClick = {() => {}}
               onShowMoreClick = {() => {}}
               onPlayerExitClick = {() => {}}
               onPlayButtonClick = {() => {}}
-              login={() => {}}
+              login = {() => {}}
+              onSubmitReview = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

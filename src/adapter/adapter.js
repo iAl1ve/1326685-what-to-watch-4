@@ -24,7 +24,7 @@ export const getAdaptedFilm = (film) => {
 
 export const getAdaptedFilms = (films) => films.map((film) => getAdaptedFilm(film));
 
-export const getAdaptComment = (comment) => {
+export const getAdaptedComment = (comment) => {
   return {
     id: comment.id,
     text: comment.comment,
@@ -35,6 +35,8 @@ export const getAdaptComment = (comment) => {
   };
 };
 
+export const getAdaptedComments = (comments) => comments.map((comment) => getAdaptedComment(comment));
+
 export const getAdaptedAuthInfo = (authInfo) => {
   return {
     id: authInfo.id,
@@ -43,3 +45,4 @@ export const getAdaptedAuthInfo = (authInfo) => {
     avatarUrl: BASE_URL + authInfo.avatar_url,
   };
 };
+
