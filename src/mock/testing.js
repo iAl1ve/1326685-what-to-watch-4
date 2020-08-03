@@ -247,3 +247,23 @@ export const ListReviews = [
 ];
 
 export const listGenres = [`All genres`, `Comedies`, `Drama`, `Documentary`, `Romance`, `Crime`, `Horror`];
+
+export const notAdaptedListReviews = [
+  {
+    id: 1,
+    user: {
+      id: 2,
+      name: `Kate Muir`
+    },
+    comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    date: `2016-12-24`,
+    rating: 7.6,
+  }
+];
+
+export const adaptedUserInfo = {
+  id: 1,
+  email: `Oliver.conner@gmail.com`,
+  name: `Oliver.conner`,
+  avatarUrl: `img/1.png`
+};

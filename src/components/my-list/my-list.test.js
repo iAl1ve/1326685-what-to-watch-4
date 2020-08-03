@@ -4,20 +4,14 @@ import {Router} from "react-router-dom";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import history from "../../history.js";
-import AddReview from "./add-review.jsx";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus, GENRE_DEFAULT, MAX_SHOW_MORE_FILMS} from "../../const.js";
 import {ListMovies, listGenres, ListReviews} from "../../mock/testing.js";
-
-const match = {
-  params: {
-    id: 1,
-  }
-};
+import MyList from "./my-list.jsx";
 
 const mockStore = configureStore([]);
 
-it(`Render AddReview`, () => {
+it(`Test Render MyList`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       listMovies: ListMovies,
@@ -42,22 +36,18 @@ it(`Render AddReview`, () => {
     .create(
         <Provider store = {store}>
           <Router
-            history={history}
+            history = {history}
           >
-            <AddReview
-              match = {match}
+            <MyList
               listMovies = {ListMovies}
-              onSubmitReview = {() => {}}
-              isFormDisabled = {false}
-              isStatusSend = {false}
+              onTitleButtonClick = {() => {}}
             />
           </Router>
         </Provider>, {
           createNodeMock: () => {
             return {};
           }
-        })
-        .toJSON();
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

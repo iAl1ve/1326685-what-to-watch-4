@@ -51,6 +51,7 @@ export const AppType = {
   currentGenre: string.isRequired,
   countShowMovies: number.isRequired,
   isAuthorization: bool,
+  onAddMoviesToWatch: func.isRequired,
   onTitleButtonClick: func.isRequired,
   onGenreItemClick: func.isRequired,
   onShowMoreClick: func.isRequired,
@@ -58,7 +59,6 @@ export const AppType = {
 };
 
 export const MoviePageType = {
-  movie: MovieType,
   listMovies: arrayOf(MovieType),
   isAuthorization: bool,
   onTitleButtonClick: func.isRequired,
@@ -93,18 +93,16 @@ export const ShowMoreType = {
 };
 
 export const WithFullScreenVideoPlayerType = {
-  movie: MovieType,
-  onPlayerExitClick: func.isRequired,
+  listMovies: arrayOf(MovieType),
 };
 
 export const FullScreenVideoType = {
-  title: string.isRequired,
+  title: string,
   isPlaying: bool,
   timeElapsed: any,
   currentProgress: string,
   onPlayPauseButtonClick: func.isRequired,
   onFullScreenClick: func.isRequired,
-  onPlayerExitClick: func.isRequired,
   children: node,
 };
 
@@ -131,7 +129,12 @@ export const footerType = {
 };
 
 export const addReviewType = {
-  movie: MovieType,
+  listMovies: arrayOf(MovieType),
   onSubmitReview: func.isRequired,
   isFormDisabled: bool.isRequired,
+};
+
+export const MyListType = {
+  listMovies: arrayOf(MovieType),
+  onTitleButtonClick: func.isRequired,
 };

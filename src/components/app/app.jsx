@@ -1,144 +1,124 @@
 import React, {PureComponent} from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import FullScreenVideoPlayer from "../full-screen-video-player/full-screen-video-player.jsx";
 import withFullScreenVideoPlayer from "../../hocs/with-full-screen-video-player/with-full-screen-video-player.js";
-import {getGenres, getPromoFilm, getFilms, getIsFormDisabled} from "../../reducer/data/selectors.js";
+import {getGenres, getPromoFilm, getFilms, getIsFormDisabled, getStatusSend} from "../../reducer/data/selectors.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {ActionCreator} from "../../reducer/app-state/app-state.js";
-import {getCurrentGenre, getActiveFilm, getIsPlaying, getСountShowMovies} from "../../reducer/app-state/selectors.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getCurrentGenre, getСountShowMovies} from "../../reducer/app-state/selectors.js";
+import {getAuthorizationStatus, getFavoritesFilms} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import LoaderScreen from "../loader-screen/loader-screen.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import AddReview from "../add-review/add-review.jsx";
+import MyList from "../my-list/my-list.jsx";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 import {AppType} from '../../types/index.js';
 
 const FullScreenVideoPlayerWrapped = withFullScreenVideoPlayer(FullScreenVideoPlayer);
 
 class App extends PureComponent {
-  _renderAppScreen() {
+  render() {
     const {
       listMovies,
       currentGenre,
-      activeFilm,
       promoFilm,
+      favoritesFilms,
       listGenres,
       countShowMovies,
-      isPlaying,
       isAuthorization,
+      isFormDisabled,
+      isStatusSend,
       onTitleButtonClick,
       onGenreItemClick,
       onShowMoreClick,
-      onPlayButtonClick,
-      onPlayerExitClick,
-    } = this.props;
-
-    switch (true) {
-      case listMovies === null || promoFilm === null || listGenres === null:
-        return this._renderLoader();
-      case isPlaying:
-        let currentFilm = activeFilm ? activeFilm : listMovies[0];
-
-        return (
-          <FullScreenVideoPlayerWrapped
-            movie = {currentFilm}
-            onPlayerExitClick = {onPlayerExitClick}
-          />
-        );
-      case activeFilm === null:
-
-        return (
-          <Main
-            movie = {promoFilm}
-            listMovies = {listMovies}
-            countShowMovies = {countShowMovies}
-            currentGenre = {currentGenre}
-            listGenres = {listGenres}
-            onGenreItemClick = {onGenreItemClick}
-            onShowMoreClick = {onShowMoreClick}
-            onTitleButtonClick = {onTitleButtonClick}
-            onPlayButtonClick = {onPlayButtonClick}
-          />
-        );
-      case !!activeFilm:
-        return (
-          <MoviePage
-            movie = {activeFilm}
-            listMovies = {listMovies}
-            onTitleButtonClick = {onTitleButtonClick}
-            currentGenre = {currentGenre}
-            onPlayButtonClick = {onPlayButtonClick}
-            isAuthorization = {isAuthorization}
-          />
-        );
-    }
-
-    return null;
-  }
-
-  _renderLoader() {
-    return (
-      <LoaderScreen />
-    );
-  }
-
-  render() {
-    const {
-      currentGenre,
-      listMovies,
-      isAuthorization,
-      isFormDisabled,
-      onTitleButtonClick,
-      onPlayButtonClick,
-      onPlayerExitClick,
+      onAddMoviesToWatch,
       onSubmitReview,
-      login
+      login,
     } = this.props;
 
-    if (listMovies === null) {
-      return this._renderLoader();
+    if (listMovies === null || promoFilm === null || listGenres === null) {
+      return (
+        <LoaderScreen />
+      );
     }
 
     return (
-      <BrowserRouter>
+      <Router history = {history}>
         <Switch>
-          <Route exact path="/">
-            {this._renderAppScreen()}
-          </Route>
-          <Route exact path="/dev-film">
-            <MoviePage
-              movie = {listMovies[0]}
+          <Route exact path = {AppRoute.ROOT}>
+            <Main
+              movie = {promoFilm}
               listMovies = {listMovies}
-              onTitleButtonClick = {onTitleButtonClick}
+              countShowMovies = {countShowMovies}
               currentGenre = {currentGenre}
-              onPlayButtonClick = {onPlayButtonClick}
+              listGenres = {listGenres}
+              favoritesFilms = {favoritesFilms}
               isAuthorization = {isAuthorization}
+              onGenreItemClick = {onGenreItemClick}
+              onShowMoreClick = {onShowMoreClick}
+              onTitleButtonClick = {onTitleButtonClick}
+              onAddMoviesToWatch = {onAddMoviesToWatch}
             />
           </Route>
-          <Route exact path="/dev-player">
-            <FullScreenVideoPlayerWrapped
-              movie = {listMovies[0]}
-              onPlayerExitClick = {onPlayerExitClick}
-            />
+
+          <Route exact path = {`${AppRoute.FILM_PAGE}/:id`}
+            render = {(props) => (
+              <MoviePage
+                {...props}
+                listMovies = {listMovies}
+                favoritesFilms = {favoritesFilms}
+                onTitleButtonClick = {onTitleButtonClick}
+                currentGenre = {currentGenre}
+                onAddMoviesToWatch = {onAddMoviesToWatch}
+                isAuthorization = {isAuthorization}
+              />
+            )}>
           </Route>
-          <Route exact path="/sign">
-            {isAuthorization ? this._renderAppScreen() :
-              <SignIn
+          <Route exact path = {`${AppRoute.VIDEO_PLAYER}/:id`}
+            render = {(props) => (
+              <FullScreenVideoPlayerWrapped
+                {...props}
+                listMovies = {listMovies}
+              />
+            )}>
+          </Route>
+          <Route exact path = {AppRoute.LOGIN}
+            render = {() => !isAuthorization
+              ? <SignIn
                 onSubmit = {login}
-              /> }
+              />
+              : <Redirect to = {AppRoute.ROOT} /> }>
           </Route>
-          <Route exact path="/dev-review">
-            <AddReview
-              movie = {listMovies[0]}
-              onSubmitReview = {onSubmitReview}
-              isFormDisabled = {isFormDisabled}
-            />
+          <Route exact path = {`${AppRoute.FILM_PAGE}/:id${AppRoute.FILM_REVIEW}`}
+            render = {(props) => isAuthorization
+              ? (
+                <AddReview
+                  {...props}
+                  listMovies = {listMovies}
+                  onSubmitReview = {onSubmitReview}
+                  isFormDisabled = {isFormDisabled}
+                  isStatusSend = {isStatusSend}
+                />
+              )
+              : <Redirect to = {AppRoute.ROOT} />}>
+          </Route>
+          <Route exact path = {AppRoute.MY_LIST}
+            render = {() => isAuthorization
+              ? (
+                <MyList
+                  listMovies = {favoritesFilms}
+                  onTitleButtonClick = {onTitleButtonClick}
+                />
+              )
+              : <Redirect to = {AppRoute.ROOT} /> }>
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -147,19 +127,18 @@ App.propTypes = AppType;
 
 const mapStateToProps = (state) => ({
   currentGenre: getCurrentGenre(state),
-  activeFilm: getActiveFilm(state),
   promoFilm: getPromoFilm(state),
   listMovies: getFilms(state),
   listGenres: getGenres(state),
+  favoritesFilms: getFavoritesFilms(state),
   countShowMovies: getСountShowMovies(state),
-  isPlaying: getIsPlaying(state),
   isAuthorization: getAuthorizationStatus(state),
   isFormDisabled: getIsFormDisabled(state),
+  isStatusSend: getStatusSend(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onTitleButtonClick(film) {
-    dispatch(ActionCreator.setActiveMovie(film));
     dispatch(DataOperation.loadReviews(film.id));
   },
   onGenreItemClick(genre) {
@@ -169,18 +148,15 @@ const mapDispatchToProps = (dispatch) => ({
   onShowMoreClick() {
     dispatch(ActionCreator.setCountShowMovies());
   },
-  onPlayerExitClick() {
-    dispatch(ActionCreator.setExitPlayMovie());
-  },
-  onPlayButtonClick() {
-    dispatch(ActionCreator.setPlayActiveMovie());
-  },
   login(authData) {
     dispatch(UserOperation.login(authData));
   },
   onSubmitReview(id, review) {
     dispatch(DataOperation.submitReview(id, review));
   },
+  onAddMoviesToWatch(id, status) {
+    dispatch(UserOperation.addFilmsToFavorites(id, status));
+  }
 });
 
 export {App};

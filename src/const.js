@@ -51,3 +51,12 @@ export const Rating = {
   VERY_GOOD: `Very good`,
   AWESOME: `Awesome`,
 };
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  FILM_PAGE: `/films`,
+  FILM_REVIEW: `/review`,
+  VIDEO_PLAYER: `/player`,
+  MY_LIST: `/mylist`,
+  ROOT: `/`,
+};

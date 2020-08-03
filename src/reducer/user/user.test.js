@@ -2,6 +2,7 @@ import {reducer, ActionType, ActionCreator, Operation} from "./user.js";
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {AuthorizationStatus} from "../../const.js";
+import {ListMovies} from "../../mock/testing.js";
 import {getAdaptedAuthInfo} from "../../adapter/adapter.js";
 
 const api = createAPI(() => {});
@@ -10,6 +11,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
     userInfo: {},
+    favoritesFilms: [],
   });
 });
 
@@ -59,6 +61,17 @@ it(`Reducer should change userInfo by a given value`, () => {
     payload: {fake: true},
   })).toEqual({
     userInfo: {fake: true},
+  });
+});
+
+it(`Reducer should update favoritesFilms by load favoritesFilms`, () => {
+  expect(reducer({
+    favoritesFilms: [],
+  }, {
+    type: ActionType.LOAD_FAVORITES_FILMS,
+    payload: ListMovies,
+  })).toEqual({
+    favoritesFilms: ListMovies,
   });
 });
 
@@ -117,6 +130,25 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_USER_INFO,
           payload: getAdaptedAuthInfo({fake: true}),
+        });
+      });
+  });
+
+  it(`Should make a correct API call get to /favorite`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoritesFilms = {fake: true};
+    const loadFavoritesFilms = Operation.loadFavoritesFilms(favoritesFilms);
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, {fake: true});
+    return loadFavoritesFilms(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FAVORITES_FILMS,
+          payload: {fake: true},
         });
       });
   });

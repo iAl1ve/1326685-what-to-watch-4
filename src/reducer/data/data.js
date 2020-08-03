@@ -93,8 +93,8 @@ const Operation = {
       .then(({data}) => {
         const comments = getAdaptedComments(data);
         dispatch(ActionCreator.loadReviews(comments));
-      }).catch(({response}) => {
-        return errorPopup(response);
+      }).catch((err) => {
+        throw err;
       });
   },
 
@@ -106,15 +106,14 @@ const Operation = {
     })
       .then(({data}) => {
         const comments = getAdaptedComments(data);
-
+        dispatch(ActionCreator.setFormBlocked(false));
         dispatch(ActionCreator.submitReview(true));
-        dispatch(ActionCreator.setFormBlocked(false));
         dispatch(ActionCreator.loadReviews(comments));
-        return successPopup();
+        successPopup();
       })
-      .catch(({response}) => {
+      .catch((err) => {
         dispatch(ActionCreator.setFormBlocked(false));
-        return errorPopup(response);
+        throw err;
       });
   },
 };

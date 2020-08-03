@@ -11,3 +11,6 @@ export const getUserInfo = (state) => {
   return state[NAME_SPACE].userInfo;
 };
 
+export const getFavoritesFilms = (state) => {
+  return state[NAME_SPACE].favoritesFilms;
+};

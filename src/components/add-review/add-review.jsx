@@ -1,5 +1,10 @@
 import React, {PureComponent, createRef} from "react";
-import {MIN_LENGTH_TEXT_REVIEW, MAX_LENGTH_TEXT_REVIEW, DEFAULT_CHECKED_STAR, COUNT_STARS} from "../../const.js";
+import {Link} from "react-router-dom";
+import history from "../../history.js";
+import {connect} from "react-redux";
+import {getUserInfo} from "../../reducer/user/selectors.js";
+import {MIN_LENGTH_TEXT_REVIEW, MAX_LENGTH_TEXT_REVIEW, DEFAULT_CHECKED_STAR, COUNT_STARS, AppRoute} from "../../const.js";
+import {getCurrentFilm} from "../../utils.js";
 import {addReviewType} from '../../types/index.js';
 
 class AddReview extends PureComponent {
@@ -8,25 +13,37 @@ class AddReview extends PureComponent {
 
     this.reviewRef = createRef();
     this.formRef = createRef();
+    this._movie = null;
+    this._id = Number(this.props.match.params.id);
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(evt) {
     const {onSubmitReview} = this.props;
-    const {id} = this.props.movie;
 
     evt.preventDefault();
 
-    onSubmitReview(id, {
+    onSubmitReview(this._id, {
       rating: this.formRef.current.rating.value,
       comment: this.reviewRef.current.value,
     });
   }
 
+  componentDidUpdate() {
+    const {isStatusSend} = this.props;
+    const id = this._id;
+
+    if (isStatusSend) {
+      history.push(`${AppRoute.FILM_PAGE}/${id}`);
+    }
+  }
+
   render() {
-    const {title, src, background} = this.props.movie;
-    const {isFormDisabled} = this.props;
+    const movie = getCurrentFilm(this.props.listMovies, this._id);
+    const {id, title, src, background} = movie;
+    const {isFormDisabled, userInfo} = this.props;
+    const {avatarUrl} = userInfo;
 
     return (
       <section className="movie-card movie-card--full">
@@ -42,19 +59,19 @@ class AddReview extends PureComponent {
 
           <header className="page-header">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to = {AppRoute.ROOT} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">
+                  <Link to={`${AppRoute.FILM_PAGE}/${id}`} className="breadcrumbs__link">
                     {title}
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -64,7 +81,7 @@ class AddReview extends PureComponent {
 
             <div className="user-block">
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                <img src={avatarUrl} alt="User avatar" width="63" height="63" />
               </div>
             </div>
           </header>
@@ -136,4 +153,10 @@ class AddReview extends PureComponent {
 
 AddReview.propTypes = addReviewType;
 
-export default AddReview;
+const mapStateToProps = (state) => ({
+  userInfo: getUserInfo(state),
+});
+
+export {AddReview};
+
+export default connect(mapStateToProps)(AddReview);

@@ -1,20 +1,25 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import TabsComponent from "../tabs/tabs.jsx";
 import withTabs from "../../hocs/with-tabs/with-tabs.js";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withMoviesList from "../../hocs/with-movies-list/with-movies-list.js";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
-import {MAX_COUNT_SIMILAR_FILMS} from "../../const.js";
-import {getSimilarGenreFilms} from "../../utils.js";
+import {MAX_COUNT_SIMILAR_FILMS, AppRoute} from "../../const.js";
+import {getSimilarGenreFilms, getCurrentFilm} from "../../utils.js";
+import history from "../../history.js";
 import {MoviePageType} from '../../types/index.js';
 
 const TabsWrapped = withTabs(TabsComponent);
 const MoviesListWrapped = withMoviesList(MoviesList);
 
 const MoviePage = (props) => {
-  const {movie, listMovies, isAuthorization, onTitleButtonClick, onPlayButtonClick} = props;
+  const {listMovies, favoritesFilms, isAuthorization, onTitleButtonClick, onAddMoviesToWatch} = props;
+  const id = Number(props.match.params.id);
+  const movie = getCurrentFilm(listMovies, id);
   const {title, genre, year, src, background} = movie;
+  let isFavorites = !favoritesFilms.find((film) => film.id === id);
   const similarGenreFilms = getSimilarGenreFilms(listMovies, genre, title).slice(0, MAX_COUNT_SIMILAR_FILMS);
 
   return (
@@ -41,7 +46,9 @@ const MoviePage = (props) => {
 
               <div className="movie-card__buttons">
                 <button
-                  onClick={() => onPlayButtonClick()}
+                  onClick = {() => {
+                    history.push(`${AppRoute.VIDEO_PLAYER}/${id}`);
+                  }}
                   className="btn btn--play movie-card__button"
                   type="button"
                 >
@@ -50,14 +57,35 @@ const MoviePage = (props) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                <button
+                  onClick = {() => {
+                    if (!isAuthorization) {
+                      history.push(AppRoute.LOGIN);
+                    } else {
+                      let status = isFavorites ? 1 : 0;
+                      onAddMoviesToWatch(id, status);
+                    }
+                  }}
+                  className="btn btn--list movie-card__button" type="button">
+                  {isFavorites
+                    ? (<svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>)
+                    : (<svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>)
+                  }
                   <span>My list</span>
                 </button>
                 {isAuthorization
-                  ? (<a href="add-review.html" className="btn movie-card__button">Add review</a>)
+                  ? (
+                    <Link
+                      to={`${AppRoute.FILM_PAGE}/${id}${AppRoute.FILM_REVIEW}`}
+                      className="btn movie-card__button"
+                    >
+                    Add review
+                    </Link>
+                  )
                   : null
                 }
               </div>
@@ -73,6 +101,7 @@ const MoviePage = (props) => {
 
             <TabsWrapped
               {...props}
+              movie = {movie}
             />
 
           </div>

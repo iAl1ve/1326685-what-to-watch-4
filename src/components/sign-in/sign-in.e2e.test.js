@@ -1,6 +1,8 @@
 import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import SignIn from "./sign-in.jsx";
 
 Enzyme.configure({
@@ -16,16 +18,20 @@ describe(`Sign-in e2e tests`, () => {
     const onSubmit = jest.fn();
 
     const wrapper = mount(
-        <SignIn
-          onSubmit = {onSubmit}
-          isAuthorization = {false}
-        />
+        <Router
+          history = {history}
+        >
+          <SignIn
+            onSubmit = {onSubmit}
+            isAuthorization = {false}
+          />
+        </Router>
     );
+    const Component = wrapper.find(SignIn);
 
-    const {emailRef} = wrapper.instance();
+    const {emailRef, passwordRef} = Component.instance();
+
     emailRef.current.value = `mail@mail.ru`;
-
-    const {passwordRef} = wrapper.instance();
     passwordRef.current.value = `123456`;
 
     wrapper.find(`form`).simulate(`submit`, mockEvent);

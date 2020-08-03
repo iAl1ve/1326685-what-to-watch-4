@@ -1,4 +1,5 @@
 import React from "react";
+import history from "../../history.js";
 import {FullScreenVideoType} from '../../types/index.js';
 
 const formatVideoTime = (time) => {
@@ -19,7 +20,7 @@ const formatVideoTime = (time) => {
 };
 
 const FullScreenVideoPlayer = (props) => {
-  const {title, isPlaying, timeElapsed, currentProgress, onPlayPauseButtonClick, onFullScreenClick, onPlayerExitClick, children} = props;
+  const {title, isPlaying, timeElapsed, currentProgress, onPlayPauseButtonClick, onFullScreenClick, children} = props;
 
   return (
     <div className="player">
@@ -27,7 +28,7 @@ const FullScreenVideoPlayer = (props) => {
 
       <button
         type="button"
-        onClick={() => onPlayerExitClick()}
+        onClick = {() => history.goBack()}
         className="player__exit"
       >Exit</button>
 
@@ -69,7 +70,7 @@ const FullScreenVideoPlayer = (props) => {
               </React.Fragment>
             )}
           </button>
-          <div className="player__name">{title}</div>
+          <div className="player__name">{title ? title : `Loading video...`}</div>
 
           <button
             type="button"

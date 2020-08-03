@@ -11,7 +11,6 @@ it(`Test Render FullScreenVideoPlayer`, () => {
       currentProgress = {`0`}
       onPlayPauseButtonClick = {() => {}}
       onFullScreenClick = {() => {}}
-      onPlayerExitClick = {() => {}}
       title = {ListMovies[0].title}
     />, {
       createNodeMock: () => {

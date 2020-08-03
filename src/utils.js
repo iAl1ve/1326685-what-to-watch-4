@@ -16,6 +16,10 @@ export const getSimilarGenreFilms = (listMovies, genre, title) => {
   return listMovies.filter((film) => film.genre === genre && film.title !== title);
 };
 
+export const getCurrentFilm = (listMovies, id) => {
+  return listMovies.find((film) => film.id === id);
+};
+
 export const formatTime = (time) => {
   const hours = Math.floor(time / 60);
   const minutes = time % 60;

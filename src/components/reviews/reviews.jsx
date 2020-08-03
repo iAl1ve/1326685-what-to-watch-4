@@ -11,7 +11,7 @@ const Reviews = (props) => {
         {reviews.map((review, index) => {
           return (
             <div
-              key = {review.author + index}
+              key = {review.id + index}
               className="review">
               <blockquote className="review__quote">
                 <p className="review__text">{review.text}</p>

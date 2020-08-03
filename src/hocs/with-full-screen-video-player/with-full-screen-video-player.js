@@ -1,4 +1,5 @@
 import React, {PureComponent, createRef} from 'react';
+import {getCurrentFilm} from "../../utils.js";
 import {WithFullScreenVideoPlayerType} from '../../types/index.js';
 
 const withFullScreenVideoPlayer = (Component) => {
@@ -12,15 +13,20 @@ const withFullScreenVideoPlayer = (Component) => {
         progress: null,
         duration: null,
       };
-
       this._videoRef = createRef();
+      this._title = null;
 
       this.handlePlayPauseButtonClick = this.handlePlayPauseButtonClick.bind(this);
       this.handleFullScreenClick = this.handleFullScreenClick.bind(this);
     }
 
     componentDidMount() {
-      const {movie} = this.props;
+      const {listMovies} = this.props;
+
+      const id = Number(this.props.match.params.id);
+      const movie = getCurrentFilm(listMovies, id);
+      this._title = movie.title;
+
       const {previewImage, videoLink} = movie;
       const video = this._videoRef.current;
 
@@ -32,6 +38,10 @@ const withFullScreenVideoPlayer = (Component) => {
         progress: Math.floor(video.currentTime),
         duration: Math.floor(video.duration),
       });
+
+      video.onfullscreenchange = () => {
+        video.controls = (document.fullscreenElement && document.fullscreenElement.nodeName === `VIDEO`);
+      };
     }
 
     componentWillUnmount() {
@@ -68,18 +78,15 @@ const withFullScreenVideoPlayer = (Component) => {
     }
 
     render() {
-      const {movie, onPlayerExitClick} = this.props;
-
       return (
         <Component
           {...this.props}
-          title = {movie.title}
+          title = {this._title}
           isPlaying = {this.state.isPlaying}
           timeElapsed = {this.state.timeElapsed}
           currentProgress = {Math.floor(this.state.progress * 100 / this.state.duration).toString()}
           onPlayPauseButtonClick = {this.handlePlayPauseButtonClick}
           onFullScreenClick = {this.handleFullScreenClick}
-          onPlayerExitClick = {onPlayerExitClick}
         >
           <video
             ref = {this._videoRef}

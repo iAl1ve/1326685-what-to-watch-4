@@ -3,17 +3,13 @@ import {GENRE_DEFAULT, MAX_SHOW_MORE_FILMS} from "../../const.js";
 
 const initialState = {
   currentGenre: GENRE_DEFAULT,
-  activeFilm: null,
   countShowMovies: MAX_SHOW_MORE_FILMS,
-  isPlaying: false,
 };
 
 const ActionType = {
   CHANGE_FILTER_BY_GENRE: `CHANGE_FILTER_BY_GENRE`,
-  SET_ACTIVE_MOVIE: `SET_ACTIVE_MOVIE`,
   SET_СOUNT_SHOW_MOVIES: ` SET_СOUNT_SHOW_MOVIES`,
   SET_DEFAULT_СOUNT_SHOW_MOVIES: ` SET_DEFAULT_СOUNT_SHOW_MOVIES`,
-  PLAY_ACTIVE_MOVIE: `PLAY_ACTIVE_MOVIE`,
   EXIT_PLAY_MOVIE: `EXIT_PLAY_MOVIE`,
 };
 
@@ -21,10 +17,6 @@ const ActionCreator = {
   changeCurrentGenre: (genre) => ({
     type: ActionType.CHANGE_FILTER_BY_GENRE,
     payload: genre,
-  }),
-  setActiveMovie: (movie) => ({
-    type: ActionType.SET_ACTIVE_MOVIE,
-    payload: movie,
   }),
   setCountShowMovies: () => ({
     type: ActionType.SET_СOUNT_SHOW_MOVIES,
@@ -34,14 +26,6 @@ const ActionCreator = {
     type: ActionType.SET_DEFAULT_СOUNT_SHOW_MOVIES,
     payload: MAX_SHOW_MORE_FILMS,
   }),
-  setPlayActiveMovie: () => ({
-    type: ActionType.PLAY_ACTIVE_MOVIE,
-    payload: true,
-  }),
-  setExitPlayMovie: () => ({
-    type: ActionType.EXIT_PLAY_MOVIE,
-    payload: false,
-  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,10 +34,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentGenre: action.payload,
       });
-    case ActionType.SET_ACTIVE_MOVIE:
-      return extend(state, {
-        activeFilm: action.payload,
-      });
     case ActionType.SET_СOUNT_SHOW_MOVIES:
       return extend(state, {
         countShowMovies: state.countShowMovies + action.payload,
@@ -61,14 +41,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_DEFAULT_СOUNT_SHOW_MOVIES:
       return extend(state, {
         countShowMovies: action.payload,
-      });
-    case ActionType.PLAY_ACTIVE_MOVIE:
-      return extend(state, {
-        isPlaying: action.payload,
-      });
-    case ActionType.EXIT_PLAY_MOVIE:
-      return extend(state, {
-        isPlaying: action.payload,
       });
   }
 

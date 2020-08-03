@@ -2,7 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {reducer, ActionType, Operation} from "./data.js";
 import {getAdaptedFilm, getAdaptedFilms} from "../../adapter/adapter.js";
-import {ListMovies, listGenres as ListGenres, ListReviews} from "../../mock/testing.js";
+import {ListMovies, listGenres as ListGenres, ListReviews, notAdaptedListReviews} from "../../mock/testing.js";
 
 const api = createAPI(() => {});
 
@@ -128,40 +128,52 @@ describe(`Operation work data load correctly`, () => {
       });
   });
 
-  /* it(`Should make a correct API call to /comments/id`, function () {
+  it(`Should make a correct API call to /comments/id`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const loadReviewsLoader = Operation.loadReviews(42);
+    const loadReviewsLoader = Operation.loadReviews(1);
 
     apiMock
-      .onGet(`/comments/42`)
-      .reply(200, {fake: true});
+      .onGet(`/comments/1`)
+      .reply(200, notAdaptedListReviews);
 
     return loadReviewsLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_REVIEWS,
-          payload: getAdaptedComments({fake: true}),
+          payload: ListReviews.slice(0, 1),
         });
       });
   });
 
-  it(`Should make a correct API call review to /comments`, function () {
+  /* it(`Should make a correct API call add review to /comments`, function () {
     const apiMock = new MockAdapter(api);
+    const rating = 7.6;
+    const comment = `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`;
     const dispatch = jest.fn();
-    const submitReview = Operation.submitReview({fake: true});
+    const submitReview = Operation.submitReview(1, {
+      rating,
+      comment,
+    });
 
     apiMock
-      .onPost(`/comments/42`)
-      .reply(200, {fake: true});
+      .onPost(`/comments/1`)
+      .reply(200, {
+        rating,
+        comment
+      });
     return submitReview(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SUBMIT_REVIEW,
-          payload: {fake: true},
+          payload: {
+            rating,
+            comment
+          },
         });
       });
-  }); */
+  });
+  */
 });
