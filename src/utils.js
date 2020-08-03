@@ -1,4 +1,5 @@
 import {MONTH_NAMES, Rating} from "./const.js";
+import Swal from "sweetalert2";
 
 export const formatDate = (date) => {
   date = new Date(date);
@@ -13,6 +14,10 @@ export const extend = (ob1, ob2) => {
 
 export const getSimilarGenreFilms = (listMovies, genre, title) => {
   return listMovies.filter((film) => film.genre === genre && film.title !== title);
+};
+
+export const getCurrentFilm = (listMovies, id) => {
+  return listMovies.find((film) => film.id === id);
 };
 
 export const formatTime = (time) => {
@@ -43,3 +48,20 @@ export const getRatingLevel = (rating) => {
   }
   return ratingLevel;
 };
+
+export const errorPopup = (response) => {
+  return Swal.fire({
+    icon: `error`,
+    title: `Request failed: ${response.status}`,
+    text: `An error has occurred`
+  });
+};
+
+export const successPopup = () => {
+  return Swal.fire({
+    icon: `success`,
+    title: `Good job!`,
+    text: `Your comment has been sent successfully`
+  });
+};
+

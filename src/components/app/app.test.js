@@ -5,7 +5,7 @@ import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
 import NameSpace from "../../reducer/name-space.js";
 import {ListMovies, listGenres, ListReviews} from "../../mock/testing.js";
-import {GENRE_DEFAULT, MAX_SHOW_MORE_FILMS} from "../../const.js";
+import {AuthorizationStatus, GENRE_DEFAULT, MAX_SHOW_MORE_FILMS} from "../../const.js";
 
 const mockStore = configureStore([]);
 
@@ -17,16 +17,17 @@ describe(`Test Render App`, () => {
         promoFilm: ListMovies[0],
         listGenres,
         listReviews: ListReviews,
-        isErrorLoading: false,
+        isStatusSend: false,
+        isFormDisabled: false,
       },
       [NameSpace.APP_STATE]: {
         currentGenre: GENRE_DEFAULT,
-        activeFilm: null,
         countShowMovies: MAX_SHOW_MORE_FILMS,
-        isPlaying: false,
       },
       [NameSpace.USER]: {
-        authorizationStatus: `NO_AUTH`,
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        userInfo: {},
+        favoritesFilms: [],
       }
     });
 
@@ -35,17 +36,22 @@ describe(`Test Render App`, () => {
           <Provider store = {store}>
             <App
               movie = {ListMovies[0]}
+              promoFilm = {ListMovies[0]}
               listMovies = {ListMovies}
               listGenres = {listGenres}
               listReviews = {ListReviews}
-              activeFilm = {ListMovies[0]}
+              favoritesFilms = {[]}
               currentGenre = {GENRE_DEFAULT}
               countShowMovies = {MAX_SHOW_MORE_FILMS}
+              isAuthorization = {false}
+              isFormDisabled = {false}
+              isStatusSend = {false}
               onTitleButtonClick = {() => {}}
               onGenreItemClick = {() => {}}
               onShowMoreClick = {() => {}}
-              onPlayerExitClick = {() => {}}
-              onPlayButtonClick = {() => {}}
+              login = {() => {}}
+              onSubmitReview = {() => {}}
+              onAddMoviesToWatch = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

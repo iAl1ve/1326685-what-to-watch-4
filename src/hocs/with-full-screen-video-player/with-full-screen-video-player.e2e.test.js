@@ -20,6 +20,12 @@ const MockPlayer = (props) => {
   );
 };
 
+const match = {
+  params: {
+    id: 1,
+  }
+};
+
 MockPlayer.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
@@ -40,7 +46,8 @@ describe(`WithFullScreenVideoPlayer HOC e2e tests`, () => {
   it(`Should turn on video play() when Component Did Mount`, () => {
     const wrapper = mount(
         <MockPlayerWrapped
-          movie = {ListMovies[0]}
+          match = {match}
+          listMovies = {ListMovies}
           onPlayerExitClick = {() => {}}
         />
     );
@@ -58,7 +65,8 @@ describe(`WithFullScreenVideoPlayer HOC e2e tests`, () => {
   it(`Should call video pause() on PlayPauseButton click`, () => {
     const wrapper = mount(
         <MockPlayerWrapped
-          movie = {ListMovies[0]}
+          match = {match}
+          listMovies = {ListMovies}
           onPlayerExitClick = {() => {}}
         />
     );
@@ -78,7 +86,8 @@ describe(`WithFullScreenVideoPlayer HOC e2e tests`, () => {
   it(`Should call video play() on the second PlayPauseButton click`, () => {
     const wrapper = mount(
         <MockPlayerWrapped
-          movie = {ListMovies[0]}
+          match = {match}
+          listMovies = {ListMovies}
           onPlayerExitClick = {() => {}}
         />
     );
@@ -106,7 +115,8 @@ describe(`WithFullScreenVideoPlayer HOC e2e tests`, () => {
   it(`Should call video full screen on the FullScreenVideoPlayerButton click`, () => {
     const wrapper = mount(
         <MockPlayerWrapped
-          movie = {ListMovies[0]}
+          match = {match}
+          listMovies = {ListMovies}
           onPlayerExitClick = {() => {}}
         />
     );

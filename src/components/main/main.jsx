@@ -3,17 +3,21 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import withMoviesList from "../../hocs/with-movies-list/with-movies-list.js";
 import GenresList from "../genres-list/genres-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
+import Header from "../header/header.jsx";
+import Footer from "../footer/footer.jsx";
 import {getSimilarGenreFilms} from "../../utils.js";
-import {GENRE_DEFAULT} from "../../const.js";
+import {GENRE_DEFAULT, AppRoute} from "../../const.js";
+import history from "../../history.js";
 import {AppType} from '../../types/index.js';
 
 const MoviesListWrapped = withMoviesList(MoviesList);
 
 const Main = (props) => {
-  const {movie, listMovies, currentGenre, listGenres, countShowMovies, onTitleButtonClick, onGenreItemClick, onShowMoreClick, onPlayButtonClick} = props;
-  const {title, genre, year, src, background} = movie;
+  const {movie, listMovies, favoritesFilms, currentGenre, listGenres, countShowMovies, isAuthorization, onTitleButtonClick, onGenreItemClick, onShowMoreClick, onAddMoviesToWatch} = props;
+  const {id, title, genre, year, src, background} = movie;
   const similarGenreFilms = getSimilarGenreFilms(listMovies, currentGenre, title);
   const currentListMovies = currentGenre === GENRE_DEFAULT ? listMovies : similarGenreFilms;
+  let isFavorites = !favoritesFilms.find((film) => film.id === id);
 
   return (
     <React.Fragment>
@@ -24,21 +28,9 @@ const Main = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
-        </header>
+        <Header
+          isMain = {true}
+        />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -59,18 +51,35 @@ const Main = (props) => {
 
               <div className="movie-card__buttons">
                 <button
-                  onClick={() => onPlayButtonClick()}
+                  onClick={() => {
+                    history.push(`${AppRoute.VIDEO_PLAYER}/${id}`);
+                  }}
                   className="btn btn--play movie-card__button"
                   type="button">
+
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                <button
+                  onClick = {() => {
+                    if (!isAuthorization) {
+                      history.push(AppRoute.LOGIN);
+                    } else {
+                      let status = isFavorites ? 1 : 0;
+                      onAddMoviesToWatch(id, status);
+                    }
+                  }}
+                  className="btn btn--list movie-card__button" type="button">
+                  {isFavorites
+                    ? (<svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>)
+                    : (<svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>)
+                  }
                   <span>My list</span>
                 </button>
               </div>
@@ -103,19 +112,9 @@ const Main = (props) => {
 
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer
+          isMain = {true}
+        />
       </div>
     </React.Fragment>
   );

@@ -14,6 +14,12 @@ const MockComponent = (props) => {
   );
 };
 
+const match = {
+  params: {
+    id: 1,
+  }
+};
+
 MockComponent.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -26,13 +32,14 @@ const MockComponentWrapped = withFullScreenVideoPlayer(MockComponent);
 it(`withFullScreenVideoPlayer is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
+      match = {match}
       isPlaying = {true}
       timeElapsed = {0}
       currentProgress = {`0`}
       onPlayPauseButtonClick = {() => {}}
       onFullScreenClick = {() => {}}
       onPlayerExitClick = {() => {}}
-      movie = {ListMovies[0]}
+      listMovies = {ListMovies}
     />
   ), {
     createNodeMock() {

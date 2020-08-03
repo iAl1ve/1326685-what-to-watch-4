@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const {shape, number, string, arrayOf, array, bool, func, any, node} = PropTypes;
+const {shape, number, string, arrayOf, array, bool, func, any, node, oneOfType} = PropTypes;
 
 export const MovieType = shape({
   id: number.isRequired,
@@ -28,7 +28,7 @@ export const ReviewType = shape({
   text: string.isRequired,
   author: string.isRequired,
   date: string.isRequired,
-  rating: string.isRequired,
+  rating: number.isRequired,
 });
 
 export const ReviewsType = {
@@ -50,14 +50,17 @@ export const AppType = {
   listGenres: array,
   currentGenre: string.isRequired,
   countShowMovies: number.isRequired,
+  isAuthorization: bool,
+  onAddMoviesToWatch: func.isRequired,
   onTitleButtonClick: func.isRequired,
   onGenreItemClick: func.isRequired,
   onShowMoreClick: func.isRequired,
+  login: func,
 };
 
 export const MoviePageType = {
-  movie: MovieType,
   listMovies: arrayOf(MovieType),
+  isAuthorization: bool,
   onTitleButtonClick: func.isRequired,
 };
 
@@ -90,17 +93,48 @@ export const ShowMoreType = {
 };
 
 export const WithFullScreenVideoPlayerType = {
-  movie: MovieType,
-  onPlayerExitClick: func.isRequired,
+  listMovies: arrayOf(MovieType),
 };
 
 export const FullScreenVideoType = {
-  title: string.isRequired,
+  title: string,
   isPlaying: bool,
   timeElapsed: any,
   currentProgress: string,
   onPlayPauseButtonClick: func.isRequired,
   onFullScreenClick: func.isRequired,
-  onPlayerExitClick: func.isRequired,
   children: node,
+};
+
+export const SignInType = {
+  onSubmit: func.isRequired,
+};
+
+export const headerType = {
+  userInfo: oneOfType([
+    () => null,
+    shape({
+      id: number.isRequired,
+      email: string.isRequired,
+      name: string.isRequired,
+      avatarUrl: string,
+    }).isRequired,
+  ]),
+  isMain: bool.isRequired,
+  isAuthorization: bool.isRequired,
+};
+
+export const footerType = {
+  isMain: bool.isRequired,
+};
+
+export const addReviewType = {
+  listMovies: arrayOf(MovieType),
+  onSubmitReview: func.isRequired,
+  isFormDisabled: bool.isRequired,
+};
+
+export const MyListType = {
+  listMovies: arrayOf(MovieType),
+  onTitleButtonClick: func.isRequired,
 };

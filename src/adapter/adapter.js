@@ -1,3 +1,5 @@
+import {BASE_URL} from "../const.js";
+
 export const getAdaptedFilm = (film) => {
   return {
     id: film.id,
@@ -22,7 +24,7 @@ export const getAdaptedFilm = (film) => {
 
 export const getAdaptedFilms = (films) => films.map((film) => getAdaptedFilm(film));
 
-export const getAdaptComment = (comment) => {
+export const getAdaptedComment = (comment) => {
   return {
     id: comment.id,
     text: comment.comment,
@@ -32,3 +34,15 @@ export const getAdaptComment = (comment) => {
     idUser: comment.user.id,
   };
 };
+
+export const getAdaptedComments = (comments) => comments.map((comment) => getAdaptedComment(comment));
+
+export const getAdaptedAuthInfo = (authInfo) => {
+  return {
+    id: authInfo.id,
+    email: authInfo.email,
+    name: authInfo.name,
+    avatarUrl: BASE_URL + authInfo.avatar_url,
+  };
+};
+

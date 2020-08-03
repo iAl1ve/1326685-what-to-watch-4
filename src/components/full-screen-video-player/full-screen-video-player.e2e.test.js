@@ -17,7 +17,6 @@ describe(`FullScreenVideoPlayer e2e tests`, () => {
       currentProgress = {`0`}
       onPlayPauseButtonClick = {handlePlayPauseButtonClick}
       onFullScreenClick = {() => {}}
-      onPlayerExitClick = {() => {}}
       title = {ListMovies[0].title}>
       <video></video>
     </FullScreenVideoPlayer>);
@@ -34,7 +33,6 @@ describe(`FullScreenVideoPlayer e2e tests`, () => {
       currentProgress = {`0`}
       onPlayPauseButtonClick = {() => {}}
       onFullScreenClick = {handleFullScreenClick}
-      onPlayerExitClick = {() => {}}
       title = {ListMovies[0].title}>
       <video></video>
     </FullScreenVideoPlayer>);
@@ -43,20 +41,4 @@ describe(`FullScreenVideoPlayer e2e tests`, () => {
     expect(handleFullScreenClick).toHaveBeenCalledTimes(1);
   });
 
-  it(`Click by Player Exit button calls callback`, () => {
-    const handlePlayerExitClick = jest.fn();
-    const wrapper = shallow(<FullScreenVideoPlayer
-      isPlaying = {true}
-      timeElapsed = {0}
-      currentProgress = {`0`}
-      onPlayPauseButtonClick = {() => {}}
-      onFullScreenClick = {() => {}}
-      onPlayerExitClick = {handlePlayerExitClick}
-      title = {ListMovies[0].title}>
-      <video></video>
-    </FullScreenVideoPlayer>);
-
-    wrapper.find(`.player__exit`).simulate(`click`);
-    expect(handlePlayerExitClick).toHaveBeenCalledTimes(1);
-  });
 });

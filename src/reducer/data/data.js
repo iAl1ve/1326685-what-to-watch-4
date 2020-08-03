@@ -1,6 +1,5 @@
-import {extend} from "../../utils.js";
-import {getAdaptedFilms, getAdaptedFilm} from "../../adapter/adapter.js";
-import ListReviews from "../../mock/reviews.js";
+import {extend, errorPopup, successPopup} from "../../utils.js";
+import {getAdaptedFilms, getAdaptedFilm, getAdaptedComments} from "../../adapter/adapter.js";
 import {GENRE_DEFAULT, MAX_COUNT_GENRES} from "../../const.js";
 
 const initialState = {
@@ -8,7 +7,8 @@ const initialState = {
   promoFilm: null,
   listGenres: null,
   listReviews: null,
-  isErrorLoading: false,
+  isStatusSend: false,
+  isFormDisabled: false,
 };
 
 const ActionType = {
@@ -16,7 +16,8 @@ const ActionType = {
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   LOAD_GENRES: `LOAD_GENRES`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
-  SET_ERROR: `SET_ERROR`,
+  SUBMIT_REVIEW: `SUBMIT_REVIEW`,
+  SET_FORM_BLOCKED: `SET_FORM_BLOCKED`,
 };
 
 const ActionCreator = {
@@ -48,10 +49,17 @@ const ActionCreator = {
     };
   },
 
-  setError: (error) => {
+  submitReview: (status) => {
     return {
-      type: ActionType.SET_ERROR,
-      payload: error,
+      type: ActionType.SUBMIT_REVIEW,
+      payload: status,
+    };
+  },
+
+  setFormBlocked: (status) => {
+    return {
+      type: ActionType.SET_FORM_BLOCKED,
+      payload: status,
     };
   },
 };
@@ -66,9 +74,8 @@ const Operation = {
         dispatch(ActionCreator.loadGenres(
             [GENRE_DEFAULT, ...allGenres.slice(0, MAX_COUNT_GENRES)])
         );
-      }).catch((err) => {
-        dispatch(ActionCreator.setError(true));
-        return err;
+      }).catch(({response}) => {
+        return errorPopup(response);
       });
   },
 
@@ -76,14 +83,38 @@ const Operation = {
     return api.get(`/films/promo`)
       .then(({data}) => {
         dispatch(ActionCreator.loadPromoFilm(getAdaptedFilm(data)));
-      }).catch((err) => {
-        dispatch(ActionCreator.setError(true));
-        return err;
+      }).catch(({response}) => {
+        return errorPopup(response);
       });
   },
-  // Пока сделал чтобы подгружало моковые коммментарии
-  loadReviews: () => (dispatch) => {
-    return dispatch(ActionCreator.loadReviews(ListReviews));
+
+  loadReviews: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then(({data}) => {
+        const comments = getAdaptedComments(data);
+        dispatch(ActionCreator.loadReviews(comments));
+      }).catch((err) => {
+        throw err;
+      });
+  },
+
+  submitReview: (id, review) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setFormBlocked(true));
+    return api.post(`/comments/${id}`, {
+      rating: review.rating,
+      comment: review.comment,
+    })
+      .then(({data}) => {
+        const comments = getAdaptedComments(data);
+        dispatch(ActionCreator.setFormBlocked(false));
+        dispatch(ActionCreator.submitReview(true));
+        dispatch(ActionCreator.loadReviews(comments));
+        successPopup();
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.setFormBlocked(false));
+        throw err;
+      });
   },
 };
 
@@ -105,9 +136,13 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         listReviews: action.payload,
       });
-    case ActionType.SET_ERROR:
+    case ActionType.SUBMIT_REVIEW:
       return extend(state, {
-        isErrorLoading: action.payload,
+        isStatusSend: action.payload,
+      });
+    case ActionType.SET_FORM_BLOCKED:
+      return extend(state, {
+        isFormDisabled: action.payload,
       });
   }
 

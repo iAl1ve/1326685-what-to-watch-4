@@ -2,7 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {reducer, ActionType, Operation} from "./data.js";
 import {getAdaptedFilm, getAdaptedFilms} from "../../adapter/adapter.js";
-import {ListMovies, listGenres as ListGenres, ListReviews} from "../../mock/testing.js";
+import {ListMovies, listGenres as ListGenres, ListReviews, notAdaptedListReviews} from "../../mock/testing.js";
 
 const api = createAPI(() => {});
 
@@ -13,102 +13,74 @@ describe(`Testing work Reducer`, () => {
       promoFilm: null,
       listGenres: null,
       listReviews: null,
-      isErrorLoading: false,
+      isStatusSend: false,
+      isFormDisabled: false,
     });
   });
 
   it(`Reducer should update films by load films`, () => {
     expect(reducer({
       listMovies: null,
-      promoFilm: null,
-      listGenres: null,
-      listReviews: null,
-      isErrorLoading: false,
     }, {
       type: ActionType.LOAD_FILMS,
       payload: ListMovies,
     })).toEqual({
       listMovies: ListMovies,
-      promoFilm: null,
-      listGenres: null,
-      listReviews: null,
-      isErrorLoading: false,
     });
   });
 
   it(`Reducer should update promoFilm by load promoFilm`, () => {
     expect(reducer({
-      listMovies: null,
       promoFilm: null,
-      listGenres: null,
-      listReviews: null,
-      isErrorLoading: false,
     }, {
       type: ActionType.LOAD_PROMO_FILM,
       payload: ListMovies[0],
     })).toEqual({
-      listMovies: null,
       promoFilm: ListMovies[0],
-      listGenres: null,
-      listReviews: null,
-      isErrorLoading: false,
     });
   });
 
   it(`Reducer should update promoFilm by load genres`, () => {
     expect(reducer({
-      listMovies: null,
-      promoFilm: null,
       listGenres: null,
-      listReviews: null,
-      isErrorLoading: false,
     }, {
       type: ActionType.LOAD_GENRES,
       payload: ListGenres,
     })).toEqual({
-      listMovies: null,
-      promoFilm: null,
       listGenres: ListGenres,
-      listReviews: null,
-      isErrorLoading: false,
     });
   });
 
   it(`Reducer should update listReviews by load reviews`, () => {
     expect(reducer({
-      listMovies: null,
-      promoFilm: null,
-      listGenres: null,
       listReviews: null,
-      isErrorLoading: false,
     }, {
       type: ActionType.LOAD_REVIEWS,
       payload: ListReviews,
     })).toEqual({
-      listMovies: null,
-      promoFilm: null,
-      listGenres: null,
       listReviews: ListReviews,
-      isErrorLoading: false,
     });
   });
 
-  it(`Reducer should update isErrorLoading`, () => {
+  it(`Reducer should change isStatusSend by a given value`, () => {
     expect(reducer({
-      listMovies: null,
-      promoFilm: null,
-      listGenres: null,
-      listReviews: null,
-      isErrorLoading: false,
+      isStatusSend: false,
     }, {
-      type: ActionType.SET_ERROR,
+      type: ActionType.SUBMIT_REVIEW,
       payload: true,
     })).toEqual({
-      listMovies: null,
-      promoFilm: null,
-      listGenres: null,
-      listReviews: null,
-      isErrorLoading: true,
+      isStatusSend: true
+    });
+  });
+
+  it(`Reducer should change isFormDisabled by a given value`, () => {
+    expect(reducer({
+      isFormDisabled: false,
+    }, {
+      type: ActionType.SET_FORM_BLOCKED,
+      payload: true,
+    })).toEqual({
+      isFormDisabled: true
     });
   });
 });
@@ -155,4 +127,53 @@ describe(`Operation work data load correctly`, () => {
         });
       });
   });
+
+  it(`Should make a correct API call to /comments/id`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const loadReviewsLoader = Operation.loadReviews(1);
+
+    apiMock
+      .onGet(`/comments/1`)
+      .reply(200, notAdaptedListReviews);
+
+    return loadReviewsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_REVIEWS,
+          payload: ListReviews.slice(0, 1),
+        });
+      });
+  });
+
+  /* it(`Should make a correct API call add review to /comments`, function () {
+    const apiMock = new MockAdapter(api);
+    const rating = 7.6;
+    const comment = `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`;
+    const dispatch = jest.fn();
+    const submitReview = Operation.submitReview(1, {
+      rating,
+      comment,
+    });
+
+    apiMock
+      .onPost(`/comments/1`)
+      .reply(200, {
+        rating,
+        comment
+      });
+    return submitReview(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SUBMIT_REVIEW,
+          payload: {
+            rating,
+            comment
+          },
+        });
+      });
+  });
+  */
 });
