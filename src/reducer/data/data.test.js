@@ -146,34 +146,4 @@ describe(`Operation work data load correctly`, () => {
         });
       });
   });
-
-  /* it(`Should make a correct API call add review to /comments`, function () {
-    const apiMock = new MockAdapter(api);
-    const rating = 7.6;
-    const comment = `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`;
-    const dispatch = jest.fn();
-    const submitReview = Operation.submitReview(1, {
-      rating,
-      comment,
-    });
-
-    apiMock
-      .onPost(`/comments/1`)
-      .reply(200, {
-        rating,
-        comment
-      });
-    return submitReview(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.SUBMIT_REVIEW,
-          payload: {
-            rating,
-            comment
-          },
-        });
-      });
-  });
-  */
 });
